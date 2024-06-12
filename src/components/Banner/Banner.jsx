@@ -18,14 +18,16 @@ import { Link } from "react-router-dom";
 
 export default function Banner() {
   return (
-    <div className="flex">
-                <div className="w-1/3">
-                <br />
+    <div className="flex gap-8 items-center">
+    <div className="w-1/3 text-center">
+
+        <h2 className="text-2xl font-bold">Upload and share study materials, create a collective knowledge base, and learn from each others perspectives.</h2>
+        <br />
           <Link to='/addBook' className='w-full px-5 py-4 mt-4 text-sm font-medium text-sky-700 capitalize transition-colors duration-300 transform bg-white rounded-md lg:w-auto hover:bg-pink-200 focus:outline-none focus:bg-gray-500'>
             Add your favorite books
           </Link>
         </div>
-        <div className="w-2/3 container px-6 pb-12 mx-auto">
+        <div className="w-2/3 mx-auto">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
