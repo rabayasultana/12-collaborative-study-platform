@@ -12,17 +12,17 @@ const Navbar = () => {
 
   const navLinks = (
     <>
-      <li className="font-bold">
+      <li className="font-bold text-xl text-purple">
         <NavLink to="/">Home</NavLink>
       </li>
-      <li className="font-bold">
+      <li className="font-bold text-xl text-purple">
         <NavLink to="/addBook">Add Book</NavLink>
       </li>
 
-      <li className="font-bold">
+      <li className="font-bold text-xl text-purple">
         <NavLink to="/allBooks">All Books</NavLink>
       </li>
-      <li className="font-bold">
+      <li className="font-bold text-xl text-purple">
         <NavLink to="/borrowedBooks">Borrowed Books</NavLink>
       </li>
     </>
@@ -56,10 +56,10 @@ const Navbar = () => {
               {navLinks}
             </ul>
           </div>
-          <a className="btn btn-ghost text-2xl  text-sky-700 font-bold">
-            <div className="flex gap-3">
-              <img className="h-10 w-10" src={logo} alt="" />
-              <span>Bookworm Haven</span>
+          <a className="btn btn-ghost text-4xl  text-purple font-bold">
+            <div className="flex">
+              <img className="h-10 w-20" src={logo} alt="" />
+              <span>Synapse</span>
             </div>
           </a>
         </div>
@@ -88,7 +88,7 @@ const Navbar = () => {
               </div>
               <button
                 onClick={handleLogOut}
-                className="btn text-2xl bg-sky-700 text-white ml-1"
+                className="btn text-2xl bg-purple text-white ml-1"
               >
                 Logout
               </button>
@@ -97,12 +97,12 @@ const Navbar = () => {
             <div className="flex items-center">
               
               <NavLink to="/login">
-                <button className="btn bg-sky-700 text-xl text-white ml-1">
+                <button className="btn bg-purple text-xl text-white ml-1">
                   Login
                 </button>
               </NavLink>
               <NavLink to="/register">
-                <button className="btn bg-sky-700 text-xl text-white ml-1">
+                <button className="btn bg-purple text-xl text-white ml-1">
                   Register
                 </button>
               </NavLink>

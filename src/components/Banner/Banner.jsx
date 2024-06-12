@@ -19,15 +19,15 @@ import { Link } from "react-router-dom";
 export default function Banner() {
   return (
     <div className="flex gap-8 items-center">
-    <div className="w-1/3 text-center">
+    <div className="w-1/3 ">
 
-        <h2 className="text-2xl font-bold">Upload and share study materials, create a collective knowledge base, and learn from each others perspectives.</h2>
+        <h2 className="text-2xl text-purple font-bold pb-4">Upload and share study materials, create a collective knowledge base, and learn from each others perspectives.</h2>
         <br />
-          <Link to='/addBook' className='w-full px-5 py-4 mt-4 text-sm font-medium text-sky-700 capitalize transition-colors duration-300 transform bg-white rounded-md lg:w-auto hover:bg-pink-200 focus:outline-none focus:bg-gray-500'>
+          <Link to='/addBook' className='w-full px-5 py-4 mt-4 text-xl font-medium text-neutral-100  capitalize transition-colors duration-300 transform bg-purple rounded-md lg:w-auto hover:bg-pink-200 focus:outline-none focus:bg-gray-500'>
             Add your favorite books
           </Link>
         </div>
-        <div className="w-2/3 mx-auto p-2 border border-4 border-blue-100">
+        <div className="w-2/3 mx-auto p-2 border border-4 border-blue-200">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}

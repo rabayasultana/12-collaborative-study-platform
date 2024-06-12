@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer
-      className="px-24 py-8 bg-[#8F3034] text-neutral-content"
+      className="px-24 py-8 bg-purple text-neutral-content"
       data-aos="fade-up"
     >
-      <div className="footer text-neutral-content">
+      <div className="footer text-white">
         <Link className="link link-hover text-xl" to="/">
           Home
         </Link>
@@ -28,7 +28,7 @@ const Footer = () => {
 
       <div className="border-t-2 border-yellow-500 mt-3 pt-6  md:flex justify-between">
         <div className="text-center space-y-3 lg:border-r-2 p-4 border-yellow-500 md:w-1/2">
-          <h3 className="text-4xl font-bold">Creative Canvas Corner</h3>
+          <h3 className="text-4xl font-bold">Synaps</h3>
           <h2 className="text-2xl text-yellow-500">Confirm an Order</h2>
           <p>
             Our Support and Sales team is available 24 /7 to answer your queries
