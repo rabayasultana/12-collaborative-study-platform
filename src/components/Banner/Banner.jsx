@@ -27,7 +27,7 @@ export default function Banner() {
             Add your favorite books
           </Link>
         </div>
-        <div className="w-2/3 mx-auto">
+        <div className="w-2/3 mx-auto p-2 border border-4 border-blue-100">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
