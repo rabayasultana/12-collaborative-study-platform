@@ -15,7 +15,7 @@ const Navbar = () => {
       <li className="font-bold text-xl text-purple">
         <NavLink to="/">Home</NavLink>
       </li>
-      <li className="font-bold text-xl text-purple">
+      {/* <li className="font-bold text-xl text-purple">
         <NavLink to="/addBook">Add Book</NavLink>
       </li>
 
@@ -24,7 +24,7 @@ const Navbar = () => {
       </li>
       <li className="font-bold text-xl text-purple">
         <NavLink to="/borrowedBooks">Borrowed Books</NavLink>
-      </li>
+      </li> */}
     </>
   );
 
@@ -72,18 +72,24 @@ const Navbar = () => {
           {user ? (
             <div className="flex items-center">
               <div className="flex items-center gap-2">
-              <span className="text-xl">
-                  {user?.displayName}
-                </span>
-                <Link to="/update">
-                  <img
-                    className="h-16 rounded-full"
+
+              <div title={user?.displayName} className="w-20 rounded-full">
+                <img referrerPolicy="no-referrer" 
                     src={
-                      user?.photoURL || "https://imgbb.host/images/DfdvE.png"
+                      user?.photoURL
                     }
                     alt=""
                   />
-                </Link>
+                </div>
+
+              <span className="text-xl">
+                  {/* {user?.displayName} */}
+                  <NavLink to="/dashboard">
+                <button className="btn bg-purple text-xl text-white ml-1">
+                  Dashboard
+                </button>
+              </NavLink>
+                </span>
                 
               </div>
               <button
@@ -103,7 +109,7 @@ const Navbar = () => {
               </NavLink>
               <NavLink to="/register">
                 <button className="btn bg-purple text-xl text-white ml-1">
-                  Register
+                  Sign Up
                 </button>
               </NavLink>
             </div>

@@ -8,6 +8,9 @@ export default {
     extend: {
       colors: {
         purple: "#622569",
+      },
+      fontFamily: {
+        lato: '"Lato", sans-serif',
       }
     },
   },

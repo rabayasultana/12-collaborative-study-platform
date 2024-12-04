@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer
-      className="px-24 py-8 bg-purple text-neutral-content"
+      className="px-24 py-8 bg-purple text-white"
       data-aos="fade-up"
     >
       <div className="footer text-white">
@@ -42,7 +42,7 @@ const Footer = () => {
         
           <div className="mt-8">&copy; 2024. All Rights Reserved.</div>
          <div>
-         <a href="https://www.facebook.com/groups/webdevelopmentbatch9/permalink/880573520504178">
+         <a href="https://www.facebook.com">
             {" "}
             <p>
               <div className="flex items-center justify-center gap-4 text-2xl">

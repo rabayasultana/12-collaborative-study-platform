@@ -5,9 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from "../../components/Authprovider";
-// import Navbar from "../shared/Navbar";
-// import SocialLogin from "../components/SocialLogin";
-// import Footer from "../shared/Footer";
+import SocialLogin from "./SocialLogin";
 const login = () => {
 
   const [loginError, setLoginError] = useState('');
@@ -48,11 +46,9 @@ const login = () => {
 
   return (
     <div >
-                <title>Wanderlust | Login</title>
             <ToastContainer/>
-      {/* <Navbar></Navbar> */}
       <div className="mb-10">
-        <h2 className="text-3xl mt-10 text-center font-bold">Please Login</h2>
+        <h2 className="text-3xl mt-10 text-center text-purple font-bold">Please Login</h2>
 
         {/* hero */}
         <form
@@ -84,7 +80,7 @@ const login = () => {
             />
           </div>
           <div className="form-control mt-6">
-            <button className="btn btn-primary">Login</button>
+            <button className="btn bg-purple text-white">Login</button>
           </div>
         </form>
 
@@ -98,13 +94,12 @@ const login = () => {
 
         <p className="text-center mt-4">
           Do not have an account? Please
-          <span className="text-blue-800 font-bold">
-            <Link to="/register"> Register</Link>
+          <span className="text-purple font-bold">
+            <Link to="/register"> SignUp</Link>
           </span>
         </p>
-{/* <SocialLogin></SocialLogin> */}
+<SocialLogin></SocialLogin>
       </div>
-      {/* <Footer></Footer> */}
     </div>
   );
 };
