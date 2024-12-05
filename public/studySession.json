@@ -1,0 +1,129 @@
+[
+    {
+      "id": 1,
+      "title": "Math Basics",
+      "description": "Algebra and geometry essentials",
+      "status": "Ongoing",
+      "date": "2024-12-01T10:00:00Z",
+      "instructor": "John Doe",
+      "location": "Room 101, Main Building",
+      "materials": [
+        {
+          "type": "PDF",
+          "title": "Algebra Basics",
+          "link": "https://example.com/algebra_basics.pdf"
+        },
+        {
+          "type": "Video",
+          "title": "Geometry Fundamentals",
+          "link": "https://example.com/geometry_fundamentals.mp4"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Science 101",
+      "description": "Explore physics and chemistry",
+      "status": "Closed",
+      "date": "2024-12-02T12:00:00Z",
+      "instructor": "Jane Smith",
+      "location": "Room 202, Science Block",
+      "materials": [
+        {
+          "type": "PDF",
+          "title": "Chemistry Principles",
+          "link": "https://example.com/chemistry_principles.pdf"
+        },
+        {
+          "type": "Video",
+          "title": "Physics Basics",
+          "link": "https://example.com/physics_basics.mp4"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "History Deep Dive",
+      "description": "Ancient civilizations and culture",
+      "status": "Ongoing",
+      "date": "2024-12-05T09:00:00Z",
+      "instructor": "Emily Johnson",
+      "location": "Room 303, History Department",
+      "materials": [
+        {
+          "type": "PDF",
+          "title": "Ancient Greece",
+          "link": "https://example.com/ancient_greece.pdf"
+        },
+        {
+          "type": "Video",
+          "title": "Roman Empire",
+          "link": "https://example.com/roman_empire.mp4"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Programming Fundamentals",
+      "description": "Learn coding basics",
+      "status": "Ongoing",
+      "date": "2024-12-06T14:00:00Z",
+      "instructor": "Mark Lee",
+      "location": "Room 404, IT Lab",
+      "materials": [
+        {
+          "type": "PDF",
+          "title": "Introduction to Python",
+          "link": "https://example.com/python_intro.pdf"
+        },
+        {
+          "type": "Video",
+          "title": "Coding Best Practices",
+          "link": "https://example.com/coding_best_practices.mp4"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Biology for Beginners",
+      "description": "Discover life sciences",
+      "status": "Closed",
+      "date": "2024-12-07T08:30:00Z",
+      "instructor": "Sophia Brown",
+      "location": "Room 105, Biology Wing",
+      "materials": [
+        {
+          "type": "PDF",
+          "title": "Cell Biology",
+          "link": "https://example.com/cell_biology.pdf"
+        },
+        {
+          "type": "Video",
+          "title": "Basic Genetics",
+          "link": "https://example.com/basic_genetics.mp4"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Art Exploration",
+      "description": "Painting and sculpting basics",
+      "status": "Ongoing",
+      "date": "2024-12-08T11:00:00Z",
+      "instructor": "Lily Green",
+      "location": "Room 505, Art Studio",
+      "materials": [
+        {
+          "type": "PDF",
+          "title": "Introduction to Painting",
+          "link": "https://example.com/painting_intro.pdf"
+        },
+        {
+          "type": "Video",
+          "title": "Sculpture Techniques",
+          "link": "https://example.com/sculpture_techniques.mp4"
+        }
+      ]
+    }
+  ]
+  

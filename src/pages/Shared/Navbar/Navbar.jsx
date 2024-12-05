@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../components/Authprovider";
 import logo from "../../../assets/images/logo.png"
 
