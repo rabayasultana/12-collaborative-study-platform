@@ -8,6 +8,7 @@ import Register from "../pages/Register/Register";
 import StudentHome from "../pages/Dashboard/StudentHome/StudentHome";
 import Dashboard from "../Layout/Dashboard";
 import CreateNote from "../pages/Dashboard/Student/CreateNote/CreateNote";
+import CreateStudy from "../pages/Dashboard/Admin/CreateStudy/CreateStudy";
 
   
 export const router = createBrowserRouter([
@@ -17,8 +18,7 @@ export const router = createBrowserRouter([
       children: [
         {
             path: '/',
-            element: <Home></Home>,
-            loader: () => fetch('/studySession.json')
+            element: <Home></Home>
         },
         {
             path: "/login",
@@ -41,6 +41,11 @@ export const router = createBrowserRouter([
         {
           path: 'createNote',
           element: <CreateNote></CreateNote>
+        },
+        // tutor
+        {
+          path: 'createStudy',
+          element: <CreateStudy></CreateStudy>
         },
       ]
     }
