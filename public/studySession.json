@@ -124,6 +124,27 @@
           "link": "https://example.com/sculpture_techniques.mp4"
         }
       ]
+    },
+    {
+      "id": 7,
+      "title": "Art Exploration",
+      "description": "Painting and sculpting basics",
+      "status": "Ongoing",
+      "date": "2024-12-08T11:00:00Z",
+      "instructor": "Lily Green",
+      "location": "Room 505, Art Studio",
+      "materials": [
+        {
+          "type": "PDF",
+          "title": "Introduction to Painting",
+          "link": "https://example.com/painting_intro.pdf"
+        },
+        {
+          "type": "Video",
+          "title": "Sculpture Techniques",
+          "link": "https://example.com/sculpture_techniques.mp4"
+        }
+      ]
     }
   ]
   
