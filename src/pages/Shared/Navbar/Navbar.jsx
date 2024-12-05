@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { AuthContext } from "../../../components/Authprovider";
+import { AuthContext } from "../../../providers/Authprovider";
 import logo from "../../../assets/images/logo.png"
 
 const Navbar = () => {

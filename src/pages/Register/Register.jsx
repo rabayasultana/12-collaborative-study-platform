@@ -5,7 +5,7 @@ import { updateProfile } from "firebase/auth";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AuthContext } from "../../components/Authprovider";
+import { AuthContext } from "../../providers/Authprovider";
 import auth from "../../firebase/firebase.config";
 
 const Register = () => {

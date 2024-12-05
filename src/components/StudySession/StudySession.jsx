@@ -6,12 +6,12 @@ const StudySession = () => {
 
       // State to track whether to show all sessions or only the limited view
   const [showAll, setShowAll] = useState(false);
-  
+
     useEffect( () => {
         fetch('studySession.json')
         .then(res => res.json())
         .then(data => setStudySessions(data))
-    })
+    }, [])
   const MAX_SESSIONS_DISPLAY = 6;
 
   // Determine which sessions to display based on the "showAll" state

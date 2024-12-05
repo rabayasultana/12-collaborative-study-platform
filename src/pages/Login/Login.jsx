@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AuthContext } from "../../components/Authprovider";
+import { AuthContext } from "../../providers/Authprovider";
 import SocialLogin from "./SocialLogin"; 
 
 const Login = () => {

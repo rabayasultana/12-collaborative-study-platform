@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../components/Authprovider";
+import { AuthContext } from "../../providers/Authprovider";
 
 const SocialLogin = () => {
   const { signInWithGoogle, signInWithGithub } = useContext(AuthContext);
