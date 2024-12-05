@@ -60,7 +60,8 @@ const Register = () => {
         console.log(result);
 
         const user = { email, role };
-        fetch("https://assignment-10-painting-server.vercel.app/user", {
+        // fetch("https://assignment-10-painting-server.vercel.app/user", {
+        fetch("", {
           method: "POST",
           headers: {
             "content-type": "application/json",

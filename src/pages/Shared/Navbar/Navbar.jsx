@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../providers/Authprovider";
-import logo from "../../../assets/images/logo.png"
+import logo from "../../../assets/images/logo.png";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -67,30 +67,24 @@ const Navbar = () => {
           <ul className="menu menu-horizontal">{navLinks}</ul>
         </div>
 
-
         <div className="navbar-end">
           {user ? (
             <div className="flex items-center">
               <div className="flex items-center gap-2">
-
-              <div title={user?.displayName} className="w-20 rounded-full">
-                <img referrerPolicy="no-referrer" 
-                    src={
-                      user?.photoURL
-                    }
+                <div title={user?.displayName} className="w-20 rounded-full">
+                  <img className="w-[70px] h-[70px]" src={user?.photoURL}
                     alt=""
                   />
                 </div>
 
-              <span className="text-xl">
+                <span className="text-xl">
                   {/* {user?.displayName} */}
                   <NavLink to="/dashboard">
-                <button className="btn bg-purple text-xl text-white ml-1">
-                  Dashboard
-                </button>
-              </NavLink>
+                    <button className="btn bg-purple text-xl text-white ml-1">
+                      Dashboard
+                    </button>
+                  </NavLink>
                 </span>
-                
               </div>
               <button
                 onClick={handleLogOut}
@@ -101,7 +95,6 @@ const Navbar = () => {
             </div>
           ) : (
             <div className="flex items-center">
-              
               <NavLink to="/login">
                 <button className="btn bg-purple text-xl text-white ml-1">
                   Login

@@ -8,7 +8,7 @@ import Register from "../pages/Register/Register";
 import StudentHome from "../pages/Dashboard/StudentHome/StudentHome";
 import Dashboard from "../Layout/Dashboard";
 import CreateNote from "../pages/Dashboard/Student/CreateNote/CreateNote";
-import CreateStudy from "../pages/Dashboard/Admin/CreateStudy/CreateStudy";
+import CreateStudy from "../pages/Dashboard/Tutor/CreateStudy/CreateStudy";
 
   
 export const router = createBrowserRouter([

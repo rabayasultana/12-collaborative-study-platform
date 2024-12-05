@@ -15,7 +15,7 @@ const Dashboard = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="createNote" className="hover:underline">
+              <NavLink to="/dashboard/createNote" className="hover:underline">
                 Create Note
               </NavLink>
             </li>
