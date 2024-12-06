@@ -2,9 +2,11 @@ import { useState } from "react";
 import useAuth from "../../../../hooks/useAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const CreateStudy = () => {
     const { user } = useAuth() || {};
+    const axiosSecure = useAxiosSecure();
       const [success, setSuccess] = useState("");
       const [createError, setCreateError] = useState("");
     
@@ -19,11 +21,7 @@ const CreateStudy = () => {
         setCreateError("");
 
         // send sessiondata to the database
-        // const sessionItem = {
-        //     sessionData
-        // }
-        // console.log(sessionItem);
-        axios.post('http://localhost:9000/session', sessionData)
+        axiosSecure.post('/session', sessionData)
         .then(res => {
             console.log(res.data);
             if (res.data.insertedId) {
