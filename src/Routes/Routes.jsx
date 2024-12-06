@@ -9,6 +9,7 @@ import StudentHome from "../pages/Dashboard/StudentHome/StudentHome";
 import Dashboard from "../Layout/Dashboard";
 import CreateNote from "../pages/Dashboard/Student/CreateNote/CreateNote";
 import CreateStudy from "../pages/Dashboard/Tutor/CreateStudy/CreateStudy";
+import ViewSession from "../pages/Dashboard/Tutor/ViewSession/ViewSession";
 
   
 export const router = createBrowserRouter([
@@ -44,8 +45,12 @@ export const router = createBrowserRouter([
         },
         // tutor
         {
-          path: 'createStudy',
+          path: 'createSession',
           element: <CreateStudy></CreateStudy>
+        },
+        {
+          path: 'viewSession',
+          element: <ViewSession></ViewSession>
         },
       ]
     }

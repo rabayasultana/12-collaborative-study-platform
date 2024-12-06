@@ -27,7 +27,7 @@ const StudySession = () => {
       {/* Sessions Grid */}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mx-20 border">
         {displaySessions.map((session) => (
-          <StudySessionCard key={session.id} session={session}></StudySessionCard>
+          <StudySessionCard key={session._id} session={session}></StudySessionCard>
         ))}
       </div>
 

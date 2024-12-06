@@ -1,6 +1,5 @@
 import { useState } from "react";
 import useAuth from "../../../../hooks/useAuth";
-import axios from "axios";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
@@ -183,9 +182,8 @@ const CreateStudy = () => {
               <input
                 type="text"
                 name="status"
-                value="Pending"
-                readOnly
-                className="input input-bordered bg-purple-50 text-purple-800"
+                defaultValue="Pending"
+                className="input input-bordered"
               />
             </div>
     
