@@ -23,6 +23,31 @@ const ViewMaterials = () => {
     }
   }, [axiosSecure, user?.email]);
 
+//   Delete a material
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This material will be deleted permanently!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .delete(`/materials/${id}`)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
+              Swal.fire("Deleted!", "Material has been deleted.", "success");
+              setMaterials(materials.filter((material) => material._id !== id));
+            }
+          })
+          .catch((err) => {
+            console.error("Failed to delete material:", err);
+          });
+      }
+    });
+  };
+
   // Handle update submission
   const handleUpdate = (e) => {
     e.preventDefault();

@@ -260,7 +260,7 @@ const UploadMaterials = () => {
                       <button
                         type="button"
                         onClick={() => handleRemoveImage(index)}
-                        className="text-red-500"
+                        className="text-orange-700"
                       >
                         Remove
                       </button>
@@ -287,7 +287,7 @@ const UploadMaterials = () => {
                 <button
                   type="button"
                   onClick={handleAddDriveLink}
-                  className="btn bg-blue-500 text-white"
+                  className="btn bg-purple text-white"
                 >
                   Add More
                 </button>
