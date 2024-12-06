@@ -3,12 +3,18 @@ import Swal from "sweetalert2";
 import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+
 const UploadMaterials = () => {
   const { user } = useAuth() || {};
   const axiosSecure = useAxiosSecure();
   const [approvedSessions, setApprovedSessions] = useState([]);
   const [selectedSession, setSelectedSession] = useState(null);
   const [disabledSessionId, setDisabledSessionId] = useState(null);
+  const [selectedFiles, setSelectedFiles] = useState([]); // State to store selected files
+  const [driveLinks, setDriveLinks] = useState([""]);
+  const [existingMaterial, setExistingMaterial] = useState(null); // New state to hold existing material data
 
   // Fetch approved sessions for the logged-in tutor
   useEffect(() => {
@@ -19,18 +25,37 @@ const UploadMaterials = () => {
           setApprovedSessions(res.data);
         })
         .catch((err) => {
-          console.error("Failed to fetch approved sessions:", err);
+          console.error(err);
         });
     }
   }, [axiosSecure, user?.email]);
 
+  // Fetch the existing material if it exists for the selected session
+  useEffect(() => {
+    if (selectedSession) {
+      axiosSecure
+        .get(`/materials?sessionId=${selectedSession._id}&tutorEmail=${user.email}`)
+        .then((res) => {
+          if (res.data.length > 0) {
+            setExistingMaterial(res.data[0]); // Set the existing material to state
+          } else {
+            setExistingMaterial(null); // No material found, reset state
+          }
+        })
+        .catch((err) => {
+          console.error("Error fetching existing material:", err);
+        });
+    }
+  }, [selectedSession, user?.email, axiosSecure]);
+
   // Handle file upload to ImgBB
   const uploadImage = async (imageFile) => {
+    console.log(imageFile);
     const formData = new FormData();
     formData.append("image", imageFile);
 
     const response = await fetch(
-      `https://api.imgbb.com/1/upload?key=YOUR_IMGBB_API_KEY`,
+      image_hosting_api,
       {
         method: "POST",
         body: formData,
@@ -48,39 +73,91 @@ const UploadMaterials = () => {
     const title = form.title.value;
     const sessionId = selectedSession ? selectedSession._id : null;
     const tutorEmail = user.email;
-    const driveLink = form.driveLink.value;
-    const imageFile = form.image.files[0];
 
-    // Upload the image to ImgBB
-    let imageUrl = "";
-    if (imageFile) {
-      imageUrl = await uploadImage(imageFile);
+    let imageUrls = [];
+
+    // Upload each image to ImgBB or any other service
+    if (selectedFiles.length > 0) {
+      for (let i = 0; i < selectedFiles.length; i++) {
+        const imageUrl = await uploadImage(selectedFiles[i]);
+        imageUrls.push(imageUrl);
+      }
     }
 
-    // Create material data
+    // Prepare the data to send to the backend
     const newMaterial = {
       title,
       sessionId,
       tutorEmail,
-      imageUrl,
-      driveLink,
+      imageUrls, // Array of image URLs
+      driveLinks, // Array of drive links
     };
+    
+ // Check if material already exists for this session
+ if (existingMaterial) {
+    // Update existing material (PUT request)
+    axiosSecure
+      .put(`/materials/${existingMaterial._id}`, newMaterial) // Assume you have the material ID
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          Swal.fire({
+            title: "Success!",
+            text: "Material updated successfully",
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+          form.reset();
+          setSelectedSession(null);
+          setExistingMaterial(null); // Reset the existing material state
+        }
+      })
+      .catch((err) => {
+        console.error("Error updating material:", err);
+      });
+  } else {
+    // Create new material (POST request)
+    axiosSecure
+      .post("/materials", newMaterial)
+      .then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            title: "Success!",
+            text: "Material uploaded successfully",
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+          form.reset();
+          setSelectedSession(null);
+        }
+      })
+      .catch((err) => {
+        console.error("Error uploading material:", err);
+      });
+  }
+};
 
-    // Save material to the database
-    axiosSecure.post("/materials", newMaterial).then((res) => {
-      console.log(res.data);
-      if (res.data.insertedId) {
-        Swal.fire({
-          title: "Success!",
-          text: "Material uploaded successfully",
-          icon: "success",
-          confirmButtonText: "Ok",
-        });
-        form.reset();
-        setSelectedSession(null);
-        setDisabledSessionId(null); // Enable all buttons
-      }
-    });
+  // Handle adding more Drive Links
+  const handleAddDriveLink = () => {
+    setDriveLinks([...driveLinks, ""]);
+  };
+
+  const handleDriveLinkChange = (index, value) => {
+    const newDriveLinks = [...driveLinks];
+    newDriveLinks[index] = value;
+    setDriveLinks(newDriveLinks);
+  };
+
+  // Handle file input change
+  const handleFileChange = (e) => {
+    const files = e.target.files;
+    const filesArray = Array.from(files); // Convert the FileList to an array
+    setSelectedFiles([...selectedFiles, ...filesArray]); // Add selected files to the state
+  };
+
+  // Handle remove image from the selected list
+  const handleRemoveImage = (index) => {
+    const newFiles = selectedFiles.filter((_, i) => i !== index);
+    setSelectedFiles(newFiles);
   };
 
   return (
@@ -162,21 +239,60 @@ const UploadMaterials = () => {
 
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Image</span>
+              <span className="label-text">Images</span>
             </label>
-            <input type="file" name="image" className="input input-bordered" />
+            <input
+              type="file"
+              className="input input-bordered"
+              onChange={handleFileChange}
+              multiple
+            />
+          </div>
+
+          <div className="mt-4">
+            {selectedFiles.length > 0 && (
+              <div>
+                <h3 className="font-bold text-lg">Selected Files:</h3>
+                <ul>
+                  {selectedFiles.map((file, index) => (
+                    <li key={index} className="flex justify-between items-center">
+                      <span>{file.name}</span>
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveImage(index)}
+                        className="text-red-500"
+                      >
+                        Remove
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
 
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Google Drive Link</span>
+              <span className="label-text">Google Drive Links</span>
             </label>
-            <input
-              type="text"
-              name="driveLink"
-              placeholder="Drive Link"
-              className="input input-bordered"
-            />
+            {driveLinks.map((link, index) => (
+              <div key={index} className="flex items-center space-x-2">
+                <input
+                  type="text"
+                  value={link}
+                  onChange={(e) => handleDriveLinkChange(index, e.target.value)}
+                  placeholder="Drive Link"
+                  className="input input-bordered"
+                />
+                <button
+                  type="button"
+                  onClick={handleAddDriveLink}
+                  className="btn bg-blue-500 text-white"
+                >
+                  Add More
+                </button>
+              </div>
+            ))}
           </div>
 
           <div className="form-control mt-6">
