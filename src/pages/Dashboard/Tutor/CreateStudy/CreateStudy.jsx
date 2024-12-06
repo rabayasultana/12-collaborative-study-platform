@@ -1,9 +1,10 @@
-import { useContext, useState } from "react";
-import auth from "../../../../firebase/firebase.config";
-import { AuthContext } from "../../../../providers/Authprovider";
+import { useState } from "react";
+import useAuth from "../../../../hooks/useAuth";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const CreateStudy = () => {
-    const { user } = useContext(AuthContext) || {};
+    const { user } = useAuth() || {};
       const [success, setSuccess] = useState("");
       const [createError, setCreateError] = useState("");
     
@@ -14,8 +15,26 @@ const CreateStudy = () => {
         console.log(sessionData);
     
         //success and error handling
-        setSuccess("Session created successfully!");
+        setSuccess("");
         setCreateError("");
+
+        // send sessiondata to the database
+        // const sessionItem = {
+        //     sessionData
+        // }
+        // console.log(sessionItem);
+        axios.post('http://localhost:9000/session', sessionData)
+        .then(res => {
+            console.log(res.data);
+            if (res.data.insertedId) {
+                Swal.fire({
+                  title: "Success!",
+                  text: "session created Successfully",
+                  icon: "success",
+                  confirmButtonText: "Ok",
+                });
+              }
+        })
       };
     
       return (
