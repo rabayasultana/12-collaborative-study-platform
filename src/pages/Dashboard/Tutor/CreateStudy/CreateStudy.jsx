@@ -1,18 +1,21 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import auth from "../../../../firebase/firebase.config";
+import { AuthContext } from "../../../../providers/Authprovider";
 
 const CreateStudy = () => {
+    const { user } = useContext(AuthContext) || {};
       const [success, setSuccess] = useState("");
-      const [registerError, setRegisterError] = useState("");
+      const [createError, setCreateError] = useState("");
     
       const handleCreateSession = (event) => {
         event.preventDefault();
-        const formData = new FormData(event.target);
+        const formData = new FormData(event.currentTarget);
         const sessionData = Object.fromEntries(formData.entries());
         console.log(sessionData);
     
-        // Example success and error handling
+        //success and error handling
         setSuccess("Session created successfully!");
-        setRegisterError("");
+        setCreateError("");
       };
     
       return (
@@ -47,7 +50,7 @@ const CreateStudy = () => {
               <input
                 type="text"
                 name="tutorName"
-                value="John Doe" // Example placeholder
+                defaultValue={user?.displayName || ""} // Example placeholder
                 readOnly
                 className="input input-bordered bg-purple-50 text-purple-800"
               />
@@ -61,9 +64,9 @@ const CreateStudy = () => {
               <input
                 type="email"
                 name="tutorEmail"
-                value="johndoe@example.com" // Example placeholder
+                defaultValue={user?.email || ""}
                 readOnly
-                className="input input-bordered bg-purple-50 text-purple-800"
+                className="input input-bordered"
               />
             </div>
     
@@ -171,15 +174,15 @@ const CreateStudy = () => {
     
             {/* Submit Button */}
             <div className="form-control mt-6">
-              <button className="btn bg-purple-700 text-white text-xl hover:bg-purple-800">
+              <button className="btn bg-purple text-white text-xl hover:bg-opacity-60 hover:text-black">
                 Create Session
               </button>
             </div>
           </form>
     
           {/* Success and Error Messages */}
-          {registerError && (
-            <p className="text-red-700 text-center">{registerError}</p>
+          {createError && (
+            <p className="text-red-700 text-center">{createError}</p>
           )}
           {success && <p className="text-green-600 text-center">{success}</p>}
         </div> 
