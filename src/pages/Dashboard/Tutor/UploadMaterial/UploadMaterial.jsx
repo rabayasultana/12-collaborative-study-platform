@@ -92,12 +92,12 @@ const UploadMaterials = () => {
       imageUrls, // Array of image URLs
       driveLinks, // Array of drive links
     };
-    
+
  // Check if material already exists for this session
  if (existingMaterial) {
     // Update existing material (PUT request)
     axiosSecure
-      .put(`/materials/${existingMaterial._id}`, newMaterial) // Assume you have the material ID
+      .patch(`/materials/${existingMaterial._id}`, newMaterial) // Assume you have the material ID
       .then((res) => {
         if (res.data.modifiedCount > 0) {
           Swal.fire({
