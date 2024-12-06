@@ -10,6 +10,7 @@ import Dashboard from "../Layout/Dashboard";
 import CreateNote from "../pages/Dashboard/Student/CreateNote/CreateNote";
 import CreateStudy from "../pages/Dashboard/Tutor/CreateStudy/CreateStudy";
 import ViewSession from "../pages/Dashboard/Tutor/ViewSession/ViewSession";
+import UploadMaterials from "../pages/Dashboard/Tutor/UploadMaterial/UploadMaterial";
 
   
 export const router = createBrowserRouter([
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
         {
           path: 'viewSession',
           element: <ViewSession></ViewSession>
+        },
+        {
+          path: 'uploadMaterials',
+          element: <UploadMaterials></UploadMaterials>
         },
       ]
     }
