@@ -68,6 +68,7 @@ const UploadMaterials = () => {
 
     // Save material to the database
     axiosSecure.post("/materials", newMaterial).then((res) => {
+      console.log(res.data);
       if (res.data.insertedId) {
         Swal.fire({
           title: "Success!",
@@ -139,7 +140,9 @@ const UploadMaterials = () => {
             </label>
             <input
               type="text"
-              value={selectedSession ? selectedSession._id : "No session selected"}
+              value={
+                selectedSession ? selectedSession._id : "No session selected"
+              }
               className="input input-bordered"
               readOnly
             />
@@ -179,7 +182,7 @@ const UploadMaterials = () => {
           <div className="form-control mt-6">
             <button
               className="btn bg-purple text-white text-xl"
-              disabled={!selectedSession} 
+              disabled={!selectedSession}
             >
               Confirm
             </button>

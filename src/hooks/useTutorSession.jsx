@@ -5,6 +5,7 @@ const useTutorSession = () => {
     const { user } = useAuth(); 
     const [studySessions, setStudySessions] = useState([]);
     const [loading, setLoading] = useState(true);
+    // fetch data
     useEffect( () => {
     if (!user?.email) {
         setStudySessions([]);
