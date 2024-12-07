@@ -7,8 +7,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../providers/Authprovider";
 import auth from "../../firebase/firebase.config";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Register = () => {
+  const axiosPublic = useAxiosPublic();
   const [registerError, setRegisterError] = useState("");
   const [success, setSuccess] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -55,27 +57,10 @@ const Register = () => {
     // create user
     createUser(email, password)
       .then((result) => {
-        setSuccess("User Created Successfully");
-        toast("User Created Successfully");
         console.log(result);
 
-        const user = { email, role };
-        // fetch("https://assignment-10-painting-server.vercel.app/user", {
-        fetch("", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(user),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-          });
-
-        if (result.user) {
-          setTimeout(() => navigate(from), 1000);
-        }
+        const user = { email, role, name };
+        console.log(user);
 
         // Update display name
         const currentUser = auth.currentUser;
@@ -84,7 +69,19 @@ const Register = () => {
             displayName: name,
             photoURL: photo
           })
-            .then(() => {})
+            .then(() => {
+              // create user entry in the database
+              axiosPublic.post('/users',user)
+              .then(res => {
+                if (res.data.insertedId){
+                  setSuccess("User Created Successfully");
+                  toast("User Created Successfully");
+                  navigate(from)
+                  // navigate('/')
+                  
+                }
+              })
+            })
             .catch((error) => console.error("Error updating profile", error));
         }
       })

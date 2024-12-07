@@ -63,7 +63,7 @@ const ViewAllSession = () => {
               .delete(`/session/${id}`)
               .then((res) => {
                 if (res.data.deletedCount > 0) {
-                  Swal.fire("Deleted!", "Material has been deleted.", "success");
+                  Swal.fire("Deleted!", "session has been deleted.", "success");
                   setSessions(sessions.filter((sessions) => sessions._id !== id));
                 }
               })
