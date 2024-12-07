@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const AdminSessionCard = ({ session, handleApproveSession, handleRejectSession }) => {
   const [ApprovalModalOpen, setApprovalModalOpen] = useState(false);
@@ -60,12 +61,14 @@ const handleRejectBtn = () => {
       <div className="flex justify-between items-center mt-4">
         {session.status === "approved" ? (
           <>
-            <button
-            //   onClick={() => onUpdate(session)}}
-              className="px-4 py-2 bg-purple text-white rounded-lg hover:bg-opacity-50"
-            >
-              Update
-            </button>
+            <Link to={`/dashboard/updateSession/${session._id}`}>
+
+    <button
+          className="px-4 py-2 bg-purple text-white rounded-lg hover:bg-opacity-50"
+        >
+          Update
+        </button>
+    </Link>
             <button
             //   onClick={() => onDelete(session._id)}
               className="px-4 py-2 bg-orange-700 text-white rounded-lg hover:bg-orange-600"

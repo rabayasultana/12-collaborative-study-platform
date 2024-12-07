@@ -12,7 +12,8 @@ import CreateStudy from "../pages/Dashboard/Tutor/CreateStudy/CreateStudy";
 import ViewSession from "../pages/Dashboard/Tutor/ViewSession/ViewSession";
 import UploadMaterials from "../pages/Dashboard/Tutor/UploadMaterial/UploadMaterial";
 import ViewMaterials from "../pages/Dashboard/Tutor/ViewMaterials/ViewMaterials";
-import ViewAllSession from "../pages/Dashboard/AdminHome/ViewAllSession/ViewAllSession";
+import ViewAllSession from "../pages/Dashboard/Admin/ViewAllSession/ViewAllSession";
+import UpdateSession from "../pages/Dashboard/Admin/UpdateSession/UpdateSession";
 
   
 export const router = createBrowserRouter([
@@ -66,6 +67,11 @@ export const router = createBrowserRouter([
         {
           path: 'viewAllSessions',
           element: <ViewAllSession></ViewAllSession>
+        },
+        {
+          path: 'updateSession/:id',
+          element: <UpdateSession></UpdateSession>,
+          loader: ({params}) => fetch(`http://localhost:9000/session/${params.id}`)
         },
       ]
     }

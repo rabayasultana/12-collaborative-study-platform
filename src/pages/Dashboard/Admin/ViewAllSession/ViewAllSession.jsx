@@ -45,9 +45,6 @@ const ViewAllSession = () => {
         }
     })
     .then(() => {
-        // setStudySessions((prevSessions) =>
-        //     prevSessions.filter((session) => session._id !== updatedSession._id)
-        //   ); // Remove the rejected session from the list
         window.location.reload();
       });
       };
