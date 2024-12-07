@@ -1,7 +1,8 @@
 import {  NavLink, Outlet, } from "react-router-dom";
 
 const Dashboard = () => {
-    const isAdmin = true;
+    const isAdmin = false;
+    const isStudent = false;
     return (
         <div>
             <div className="min-h-screen bg-gray-100">
@@ -27,12 +28,8 @@ const Dashboard = () => {
               View All Materials
               </NavLink>
             </li>
-            <li>
-              <NavLink to="materials" className="hover:underline">
-              View Study Materials
-              </NavLink>
-            </li>
-            </> : <>
+            </> :
+            isStudent? <>
             <li>
               <NavLink to="view-sessions" className="hover:underline">
                 View Booked Sessions
@@ -51,6 +48,27 @@ const Dashboard = () => {
             <li>
               <NavLink to="materials" className="hover:underline">
               View Study Materials
+              </NavLink>
+            </li>
+            </> : <>
+            <li>
+              <NavLink to="/dashboard/createSession" className="hover:underline">
+                Create Session
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard/viewSession" className="hover:underline">
+                View Session
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard/uploadMaterials" className="hover:underline">
+              Upload Materials
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard/viewMaterials" className="hover:underline">
+              View Materials
               </NavLink>
             </li>
             </>

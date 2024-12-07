@@ -13,8 +13,9 @@ const ViewMaterials = () => {
   useEffect(() => {
     if (user?.email) {
       axiosSecure
-        .get(`/materials?tutorEmail=${user.email}`)
+        .get(`/tutorMaterials?email=${user.email}`)
         .then((res) => {
+            console.log(res.data);
           setMaterials(res.data);
         })
         .catch((err) => {

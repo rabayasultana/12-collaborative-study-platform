@@ -65,6 +65,7 @@ export const router = createBrowserRouter([
           path: 'viewMaterials',
           element: <ViewMaterials></ViewMaterials>
         },
+        // admin
         {
           path: 'viewAllSessions',
           element: <ViewAllSession></ViewAllSession>
