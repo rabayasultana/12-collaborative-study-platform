@@ -1,41 +1,28 @@
 import { useState } from "react";
-import Swal from "sweetalert2";
 
-const AdminSessionCard = ({ session, onApprove, onReject, onUpdate, onDelete }) => {
-  const [isApprovalModalOpen, setApprovalModalOpen] = useState(false);
+const AdminSessionCard = ({ session, handleApproveSession }) => {
+  const [ApprovalModalOpen, setApprovalModalOpen] = useState(false);
   const [sessionType, setSessionType] = useState("free");
-  const [sessionAmount, setSessionAmount] = useState(0);
+  const [sessionFee, setSessionFee] = useState(0);
 
+//   handle approval modal
   const handleApprove = () => {
-    setApprovalModalOpen(true); // Open the approval modal
-  };
+    setApprovalModalOpen(true);
+  }
 
-  const handleApprovalSubmit = () => {
+// handle approve session   
+const handleApproveSubmit = () => {
     const updatedSession = {
-      ...session,
-      status: "approved",
-      fee: sessionType === "free" ? 0 : sessionAmount,
-    };
+        ...session,
+        status: "approved",
+        fee: sessionType === "free" ? 0 : sessionFee,
+      };
 
-    onApprove(updatedSession); // Pass updated session to parent
-    setApprovalModalOpen(false); // Close the modal
-    Swal.fire("Approved!", "The session has been approved.", "success");
-  };
+      handleApproveSession(updatedSession);
+      setApprovalModalOpen(false);
+    
+}
 
-  const handleReject = () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "This session will be removed from the pending list.",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes, reject it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        onReject(session._id); // Notify parent of rejection
-        Swal.fire("Rejected!", "The session has been rejected.", "success");
-      }
-    });
-  };
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
@@ -54,20 +41,23 @@ const AdminSessionCard = ({ session, onApprove, onReject, onUpdate, onDelete }) 
       </p>
       <p className="text-sm text-gray-600 mb-2">Duration: {session.duration} days</p>
       <p className="text-sm text-gray-600 mb-2">Fee: ${session.fee}</p>
-      <p className="text-sm text-gray-600 mb-2">Status: {session.status}</p>
-
+      <p className="text-sm mb-2 text-gray-600 ">Status: <span className={`${
+    session.status === "approved" 
+      ? "text-purple" 
+      : "text-orange-700"
+  }`}>{session.status}</span></p>
       <div className="flex justify-between items-center mt-4">
         {session.status === "approved" ? (
           <>
             <button
-              onClick={() => onUpdate(session)}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+            //   onClick={() => onUpdate(session)}}
+              className="px-4 py-2 bg-purple text-white rounded-lg hover:bg-opacity-50"
             >
               Update
             </button>
             <button
-              onClick={() => onDelete(session._id)}
-              className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+            //   onClick={() => onDelete(session._id)}
+              className="px-4 py-2 bg-orange-700 text-white rounded-lg hover:bg-orange-600"
             >
               Delete
             </button>
@@ -76,13 +66,13 @@ const AdminSessionCard = ({ session, onApprove, onReject, onUpdate, onDelete }) 
           <>
             <button
               onClick={handleApprove}
-              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+              className="px-4 py-2 bg-purple text-white rounded-lg hover:bg-opacity-50"
             >
               Approve
             </button>
             <button
-              onClick={handleReject}
-              className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+            //   onClick={handleReject}
+              className="px-4 py-2 bg-orange-700 text-white rounded-lg hover:bg-orange-600"
             >
               Reject
             </button>
@@ -91,7 +81,7 @@ const AdminSessionCard = ({ session, onApprove, onReject, onUpdate, onDelete }) 
       </div>
 
       {/* Approval Modal */}
-      {isApprovalModalOpen && (
+      {ApprovalModalOpen && (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
             <h3 className="text-lg font-bold mb-4">Approve Session</h3>
@@ -108,11 +98,11 @@ const AdminSessionCard = ({ session, onApprove, onReject, onUpdate, onDelete }) 
             </div>
             {sessionType === "paid" && (
               <div className="mb-4">
-                <label className="block mb-2 font-medium">Amount:</label>
+                <label className="block mb-2 font-medium">Fee:</label>
                 <input
                   type="number"
-                  value={sessionAmount}
-                  onChange={(e) => setSessionAmount(e.target.value)}
+                  value={sessionFee}
+                  onChange={(e) => setSessionFee(e.target.value)}
                   className="input input-bordered w-full"
                   min="0"
                   required
@@ -122,13 +112,13 @@ const AdminSessionCard = ({ session, onApprove, onReject, onUpdate, onDelete }) 
             <div className="flex justify-end space-x-2">
               <button
                 onClick={() => setApprovalModalOpen(false)}
-                className="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500"
+                className="px-4 py-2 bg-orange-400 text-white rounded-lg hover:bg-orange-300"
               >
                 Cancel
               </button>
               <button
-                onClick={handleApprovalSubmit}
-                className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+                onClick={handleApproveSubmit}
+                className="px-4 py-2 bg-purple bg-opacity-70 text-white rounded-lg hover:bg-opacity-40"
               >
                 Approve
               </button>

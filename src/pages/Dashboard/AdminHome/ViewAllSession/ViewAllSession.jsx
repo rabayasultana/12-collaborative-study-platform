@@ -1,92 +1,35 @@
 import AdminSessionCard from "../AdminSessionCard/AdminSessionCard";
 import useSession from "../../../../hooks/useSession";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
 const ViewAllSession = () => {
-  const [studySessions, setStudySessions] = useSession(); // Fetch sessions using the custom hook
+    const axiosSecure = useAxiosSecure();
+  const [ studySessions ] = useSession();
 
-  // Approve a session
-  const handleApproveSession = (updatedSession) => {
-    // API integration placeholder: Replace this with your backend call
-    Swal.fire("Approved!", "The session has been approved.", "success");
-    setStudySessions((prevSessions) =>
-      prevSessions.map((session) =>
-        session._id === updatedSession._id
-          ? { ...session, status: "approved", fee: updatedSession.fee }
-          : session
-      )
-    );
-  };
-
-  // Reject a session
-  const handleRejectSession = (sessionId) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "This session will be removed from the pending list.",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes, reject it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // API integration placeholder: Replace this with your backend call
-        Swal.fire("Rejected!", "The session has been rejected.", "success");
-        setStudySessions((prevSessions) =>
-          prevSessions.filter((session) => session._id !== sessionId)
-        );
-      }
-    });
-  };
-
-  // Update a session
-  const handleUpdateSession = (updatedSession) => {
-    Swal.fire({
-      title: "Update Fee",
-      input: "number",
-      inputLabel: "Enter the new fee for this session",
-      inputValue: updatedSession.fee,
-      showCancelButton: true,
-      confirmButtonText: "Update",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // API integration placeholder: Replace this with your backend call
-        const newFee = parseInt(result.value, 10) || updatedSession.fee;
-        Swal.fire("Updated!", "The session has been updated.", "success");
-        setStudySessions((prevSessions) =>
-          prevSessions.map((session) =>
-            session._id === updatedSession._id
-              ? { ...updatedSession, fee: newFee }
-              : session
-          )
-        );
-      }
-    });
-  };
-
-  // Delete a session
-  const handleDeleteSession = (sessionId) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "This session will be deleted permanently!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // API integration placeholder: Replace this with your backend call
-        Swal.fire("Deleted!", "The session has been deleted.", "success");
-        setStudySessions((prevSessions) =>
-          prevSessions.filter((session) => session._id !== sessionId)
-        );
-      }
-    });
-  };
+    // Approve a session
+    const handleApproveSession = (updatedSession) => {
+    //   updating in database
+    axiosSecure.patch(`/session/${updatedSession._id}`, updatedSession)
+    .then((res) => {
+        if (res.data.modifiedCount > 0) {
+            Swal.fire(
+                "Updated!",
+                "Material has been updated successfully.",
+                "success"
+              ); 
+        }
+    })
+    .then(() => {
+        window.location.reload();
+      });
+      };
 
   return (
     <div>
       {/* Section Header */}
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-blue-600">Study Sessions</h2>
-        <p className="text-gray-600 mt-2">Manage all study sessions created by tutors</p>
+        <h2 className="text-3xl font-bold text-purple">Study Sessions</h2>
       </div>
 
       {/* Sessions Grid */}
@@ -95,10 +38,10 @@ const ViewAllSession = () => {
           <AdminSessionCard
             key={session._id}
             session={session}
-            onApprove={handleApproveSession}
-            onReject={handleRejectSession}
-            onUpdate={handleUpdateSession}
-            onDelete={handleDeleteSession}
+            handleApproveSession={handleApproveSession}
+            // onReject={handleRejectSession}
+            // onUpdate={handleUpdateSession}
+            // onDelete={handleDeleteSession}
           />
         ))}
       </div>
