@@ -14,6 +14,7 @@ import UploadMaterials from "../pages/Dashboard/Tutor/UploadMaterial/UploadMater
 import ViewMaterials from "../pages/Dashboard/Tutor/ViewMaterials/ViewMaterials";
 import ViewAllSession from "../pages/Dashboard/Admin/ViewAllSession/ViewAllSession";
 import UpdateSession from "../pages/Dashboard/Admin/UpdateSession/UpdateSession";
+import PrivateRoute from "./PrivateRoute";
 
   
 export const router = createBrowserRouter([
@@ -41,7 +42,7 @@ export const router = createBrowserRouter([
     },
     {
       path: "dashboard",
-      element: <Dashboard></Dashboard>,
+      element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
       children: [
         {
           path: 'createNote',

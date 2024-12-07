@@ -1,6 +1,7 @@
 import {  NavLink, Outlet, } from "react-router-dom";
 
 const Dashboard = () => {
+    const isAdmin = true;
     return (
         <div>
             <div className="min-h-screen bg-gray-100">
@@ -9,7 +10,30 @@ const Dashboard = () => {
         <aside className="p-4 border-r shadow-md bg-purple text-white min-h-screen">
           <h2 className="text-lg font-bold mb-4">Dashboard Menu</h2>
           <ul className="space-y-2">
-          <li>
+          {
+            isAdmin ? <>
+            <li>
+              <NavLink to="view-sessions" className="hover:underline">
+                View All Users
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard/viewAllSessions" className="hover:underline">
+                View All Study Sessions
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="manageNotes" className="hover:underline">
+              View All Materials
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="materials" className="hover:underline">
+              View Study Materials
+              </NavLink>
+            </li>
+            </> : <>
+            <li>
               <NavLink to="view-sessions" className="hover:underline">
                 View Booked Sessions
               </NavLink>
@@ -29,7 +53,27 @@ const Dashboard = () => {
               View Study Materials
               </NavLink>
             </li>
+            </>
+          }
+            {/* shared */}
+            <hr />
+            <li>
+              <NavLink to="/" className="hover:underline">
+              Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/logout" className="hover:underline">
+              Logout
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/register" className="hover:underline">
+              Register
+              </NavLink>
+            </li>
           </ul>
+          
         </aside>
 
         {/* Main Content */}

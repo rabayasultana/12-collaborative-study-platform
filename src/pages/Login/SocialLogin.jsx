@@ -2,8 +2,10 @@ import { useContext } from "react";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/Authprovider";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const SocialLogin = () => {
+  const axiosPublic = useAxiosPublic();
   const { signInWithGoogle, signInWithGithub } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -15,13 +17,17 @@ const SocialLogin = () => {
     signInWithGoogle()
       .then((result) => {
         console.log("google", result.user);
-        if (result.user) {
-          navigate(from);
+        const userInfo = {
+          email: result.user?.email,
+          name: result.user?.displayName,
+          role: "student",
         }
+        axiosPublic.post('/users', userInfo)
+        .then(res => {
+          console.log(res.data);
+          navigate(from);
+        })
       })
-      .catch((error) => {
-        console.error(error.message);
-      });
   };
 
   // handle github SignIn button
@@ -29,13 +35,17 @@ const SocialLogin = () => {
     signInWithGithub()
       .then((result) => {
         console.log("github", result.user);
-        if (result.user) {
-          navigate(from);
+        const userInfo = {
+          email: result.user?.email,
+          name: result.user?.displayName,
+          role: "student",
         }
+        axiosPublic.post('/users', userInfo)
+        .then(res => {
+          console.log(res.data);
+          navigate(from);
+        })
       })
-      .catch((error) => {
-        console.error(error.message);
-      });
   };
 
   return (
