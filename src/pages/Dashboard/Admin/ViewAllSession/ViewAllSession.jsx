@@ -49,6 +49,31 @@ const ViewAllSession = () => {
       });
       };
 
+      // delete a session
+      const handleDeleteSession = (id) => {
+        Swal.fire({
+          title: "Are you sure?",
+          text: "This material will be deleted permanently!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            axiosSecure
+              .delete(`/session/${id}`)
+              .then((res) => {
+                if (res.data.deletedCount > 0) {
+                  Swal.fire("Deleted!", "Material has been deleted.", "success");
+                  setSessions(sessions.filter((sessions) => sessions._id !== id));
+                }
+              })
+              .catch((err) => {
+                console.error("Failed to delete material:", err);
+              });
+          }
+        });
+      };
+
   return (
     <div>
       {/* Section Header */}
@@ -64,8 +89,7 @@ const ViewAllSession = () => {
             session={session}
             handleApproveSession={handleApproveSession}
             handleRejectSession={handleRejectSession}
-            // onUpdate={handleUpdateSession}
-            // onDelete={handleDeleteSession}
+            handleDeleteSession={handleDeleteSession}
           />
         ))}
       </div>

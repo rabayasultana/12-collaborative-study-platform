@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const AdminSessionCard = ({ session, handleApproveSession, handleRejectSession }) => {
+const AdminSessionCard = ({ session, handleApproveSession, handleRejectSession, handleDeleteSession }) => {
   const [ApprovalModalOpen, setApprovalModalOpen] = useState(false);
   const [sessionType, setSessionType] = useState("free");
   const [sessionFee, setSessionFee] = useState(0);
@@ -70,7 +70,7 @@ const handleRejectBtn = () => {
         </button>
     </Link>
             <button
-            //   onClick={() => onDelete(session._id)}
+              onClick={() => handleDeleteSession(session._id)}
               className="px-4 py-2 bg-orange-700 text-white rounded-lg hover:bg-orange-600"
             >
               Delete

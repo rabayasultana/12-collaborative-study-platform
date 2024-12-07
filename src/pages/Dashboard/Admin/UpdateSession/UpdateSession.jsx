@@ -13,6 +13,7 @@ const UpdateSession = () => {
   const axiosSecure = useAxiosSecure();
   // console.log(session);
 
+  // update 
 const handleUpdate = (e) => {
   e.preventDefault();
   const newFormData = new FormData(e.currentTarget);
