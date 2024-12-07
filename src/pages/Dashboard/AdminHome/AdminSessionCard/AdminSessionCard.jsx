@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const AdminSessionCard = ({ session, handleApproveSession }) => {
+const AdminSessionCard = ({ session, handleApproveSession, handleRejectSession }) => {
   const [ApprovalModalOpen, setApprovalModalOpen] = useState(false);
   const [sessionType, setSessionType] = useState("free");
   const [sessionFee, setSessionFee] = useState(0);
@@ -21,6 +21,17 @@ const handleApproveSubmit = () => {
       handleApproveSession(updatedSession);
       setApprovalModalOpen(false);
     
+}
+
+// handle approve session   
+const handleRejectBtn = () => {
+    const updatedSession = {
+        ...session,
+        status: "rejected",
+        fee: sessionFee,
+      };
+
+      handleRejectSession(updatedSession);
 }
 
 
@@ -71,7 +82,7 @@ const handleApproveSubmit = () => {
               Approve
             </button>
             <button
-            //   onClick={handleReject}
+              onClick={handleRejectBtn}
               className="px-4 py-2 bg-orange-700 text-white rounded-lg hover:bg-orange-600"
             >
               Reject
