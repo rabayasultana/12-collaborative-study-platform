@@ -15,7 +15,7 @@ const ViewMaterials = () => {
       axiosSecure
         .get(`/tutorMaterials?email=${user.email}`)
         .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
           setMaterials(res.data);
         })
         .catch((err) => {

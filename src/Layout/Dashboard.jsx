@@ -1,9 +1,12 @@
 import {  NavLink, Outlet, } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import useAdmin from "../hooks/useAdmin";
+import useTutor from "../hooks/useTutor";
 
 const Dashboard = () => {
     const {logOut} = useAuth();
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
+    const [isTutor] = useTutor();
     const isStudent = false;
     return (
         <div>
@@ -35,29 +38,8 @@ const Dashboard = () => {
               View All Materials
               </NavLink>
             </li>
-            </> :
-            isStudent? <>
-            <li>
-              <NavLink to="view-sessions" className="hover:underline">
-                View Booked Sessions
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/dashboard/createNote" className="hover:underline">
-                Create Note
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="manageNotes" className="hover:underline">
-              Manage Personal Notes
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="materials" className="hover:underline">
-              View Study Materials
-              </NavLink>
-            </li>
-            </> : <>
+            </> : isTutor?
+            <>
             <li>
               <NavLink to="/dashboard/createSession" className="hover:underline">
                 Create Session
@@ -76,6 +58,27 @@ const Dashboard = () => {
             <li>
               <NavLink to="/dashboard/viewMaterials" className="hover:underline">
               View Materials
+              </NavLink>
+            </li>
+            </> :<>
+            <li>
+              <NavLink to="view-sessions" className="hover:underline">
+                View Booked Sessions
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard/createNote" className="hover:underline">
+                Create Note
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="manageNotes" className="hover:underline">
+              Manage Personal Notes
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="materials" className="hover:underline">
+              View Study Materials
               </NavLink>
             </li>
             </>
