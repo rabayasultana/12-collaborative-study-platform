@@ -15,6 +15,8 @@ import ViewMaterials from "../pages/Dashboard/Tutor/ViewMaterials/ViewMaterials"
 import ViewAllSession from "../pages/Dashboard/Admin/ViewAllSession/ViewAllSession";
 import UpdateSession from "../pages/Dashboard/Admin/UpdateSession/UpdateSession";
 import PrivateRoute from "./PrivateRoute";
+import AdminHome from "../pages/Dashboard/Admin/AdminHome/AdminHome";
+import ViewAllUsers from "../pages/Dashboard/Admin/ViewAllUsers/ViewAllUsers";
 
   
 export const router = createBrowserRouter([
@@ -66,6 +68,14 @@ export const router = createBrowserRouter([
           element: <ViewMaterials></ViewMaterials>
         },
         // admin
+        {
+          path: 'adminHome',
+          element: <AdminHome></AdminHome>
+        },
+        {
+          path: 'viewAllUsers',
+          element: <ViewAllUsers></ViewAllUsers>
+        },
         {
           path: 'viewAllSessions',
           element: <ViewAllSession></ViewAllSession>

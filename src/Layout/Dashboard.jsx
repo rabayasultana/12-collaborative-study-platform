@@ -1,7 +1,7 @@
 import {  NavLink, Outlet, } from "react-router-dom";
 
 const Dashboard = () => {
-    const isAdmin = false;
+    const isAdmin = true;
     const isStudent = false;
     return (
         <div>
@@ -14,7 +14,12 @@ const Dashboard = () => {
           {
             isAdmin ? <>
             <li>
-              <NavLink to="view-sessions" className="hover:underline">
+              <NavLink to="/dashboard/adminHome" className="hover:underline">
+                Admin Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard/viewAllUsers" className="hover:underline">
                 View All Users
               </NavLink>
             </li>
