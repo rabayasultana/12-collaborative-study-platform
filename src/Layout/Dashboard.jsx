@@ -1,6 +1,8 @@
 import {  NavLink, Outlet, } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const Dashboard = () => {
+    const {logOut} = useAuth();
     const isAdmin = true;
     const isStudent = false;
     return (
