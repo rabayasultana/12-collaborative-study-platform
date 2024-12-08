@@ -16,7 +16,7 @@ const SocialLogin = () => {
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then((result) => {
-        console.log("google", result.user);
+        // console.log("google", result.user);
         const userInfo = {
           email: result.user?.email,
           name: result.user?.displayName,
@@ -34,7 +34,7 @@ const SocialLogin = () => {
   const handleGithubSignIn = () => {
     signInWithGithub()
       .then((result) => {
-        console.log("github", result.user);
+        // console.log("github", result.user);
         const userInfo = {
           email: result.user?.email,
           name: result.user?.displayName,

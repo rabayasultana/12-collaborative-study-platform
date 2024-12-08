@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import useAuth from "../../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
@@ -8,12 +8,14 @@ const CreateStudy = () => {
     const axiosSecure = useAxiosSecure();
       const [success, setSuccess] = useState("");
       const [createError, setCreateError] = useState("");
+
+      const formRef = useRef();
     
       const handleCreateSession = (event) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         const sessionData = Object.fromEntries(formData.entries());
-        console.log(sessionData);
+        // console.log(sessionData);
     
         //success and error handling
         setSuccess("");
@@ -22,7 +24,7 @@ const CreateStudy = () => {
         // send sessiondata to the database
         axiosSecure.post('/session', sessionData)
         .then(res => {
-            console.log(res.data);
+            // console.log(res.data);
             if (res.data.insertedId) {
                 Swal.fire({
                   title: "Success!",
@@ -30,6 +32,9 @@ const CreateStudy = () => {
                   icon: "success",
                   confirmButtonText: "Ok",
                 });
+                // Reset the form
+        formRef.current.reset();
+
               }
         })
       };

@@ -2,12 +2,13 @@ import {  NavLink, Outlet, } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import useAdmin from "../hooks/useAdmin";
 import useTutor from "../hooks/useTutor";
+import useStudent from "../hooks/useStudent";
 
 const Dashboard = () => {
     const {logOut} = useAuth();
     const [isAdmin] = useAdmin();
     const [isTutor] = useTutor();
-    const isStudent = false;
+    const [isStudent] = useStudent();
     return (
         <div>
             <div className="min-h-screen bg-gray-100">
@@ -34,7 +35,7 @@ const Dashboard = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="manageNotes" className="hover:underline">
+              <NavLink to="/dashboard/viewAllMaterials" className="hover:underline">
               View All Materials
               </NavLink>
             </li>
@@ -60,7 +61,8 @@ const Dashboard = () => {
               View Materials
               </NavLink>
             </li>
-            </> :<>
+            </> : isStudent?
+            <>
             <li>
               <NavLink to="view-sessions" className="hover:underline">
                 View Booked Sessions
@@ -81,7 +83,7 @@ const Dashboard = () => {
               View Study Materials
               </NavLink>
             </li>
-            </>
+            </> : <></>
           }
             {/* shared */}
             <hr />

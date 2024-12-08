@@ -17,7 +17,7 @@ const ViewSession = () => {
     try {
       // Create the new session in the database
       const response = await axiosSecure.post('/session', newSession);
-      console.log(response.data);
+    //   console.log(response.data);
 
       // If new session created successfully
       if (response.data.insertedId) {

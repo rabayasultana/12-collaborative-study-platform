@@ -9,9 +9,9 @@ const useTutor = () => {
         queryKey: [user?.email, "isTutor"],
     enabled: !loading,
     queryFn: async () => {
-          console.log("asking or checking is tutor", user);
+        //   console.log("asking or checking is tutor", user);
       const res = await axiosSecure.get(`/users/tutor/${user.email}`);
-      console.log(res.data);
+    //   console.log(res.data);
       return res.data?.tutor;
     },
   });

@@ -3,16 +3,19 @@ import StudySessionCard from "./StudySessionCard";
 import useSession from "../../hooks/useSession";
 
 const StudySession = () => {
-    const [studySessions] = useSession();
-      // State to track whether to show all sessions or only the limited view
+  const [studySessions] = useSession();
+  // State to track whether to show all sessions or only the limited view
   const [showAll, setShowAll] = useState(false);
 
   const MAX_SESSIONS_DISPLAY = 6;
 
+  // Filter sessions to show only those with status 'approved'
+  const approvedSessions = studySessions.filter((session) => session.status === 'approved');
+
   // Determine which sessions to display based on the "showAll" state
   const displaySessions = showAll
-    ? studySessions
-    : studySessions.slice(0, MAX_SESSIONS_DISPLAY);
+    ? approvedSessions
+    : approvedSessions.slice(0, MAX_SESSIONS_DISPLAY);
 
   return (
     <div>
@@ -32,7 +35,7 @@ const StudySession = () => {
       </div>
 
       {/* See All Button */}
-      {studySessions.length > MAX_SESSIONS_DISPLAY && (
+      {approvedSessions.length > MAX_SESSIONS_DISPLAY && (
         <div className="text-center mt-8">
           <button
             onClick={() => setShowAll(!showAll)}

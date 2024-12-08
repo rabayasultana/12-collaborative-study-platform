@@ -14,7 +14,7 @@ const UploadMaterials = () => {
   const [disabledSessionId, setDisabledSessionId] = useState(null);
   const [selectedFiles, setSelectedFiles] = useState([]); // State to store selected files
   const [driveLinks, setDriveLinks] = useState([""]);
-  const [existingMaterial, setExistingMaterial] = useState(null); // New state to hold existing material data
+//   const [existingMaterial, setExistingMaterial] = useState(null); // New state to hold existing material data
 
   // Fetch approved sessions for the logged-in tutor
   useEffect(() => {
@@ -22,6 +22,7 @@ const UploadMaterials = () => {
       axiosSecure
         .get(`/approvedSessions?email=${user.email}`)
         .then((res) => {
+            // console.log(res.data);
           setApprovedSessions(res.data);
         })
         .catch((err) => {
@@ -31,26 +32,27 @@ const UploadMaterials = () => {
   }, [axiosSecure, user?.email]);
 
   // Fetch the existing material if it exists for the selected session
-  useEffect(() => {
-    if (selectedSession) {
-      axiosSecure
-        .get(`/materials?sessionId=${selectedSession._id}&tutorEmail=${user.email}`)
-        .then((res) => {
-          if (res.data.length > 0) {
-            setExistingMaterial(res.data[0]); // Set the existing material to state
-          } else {
-            setExistingMaterial(null); // No material found, reset state
-          }
-        })
-        .catch((err) => {
-          console.error("Error fetching existing material:", err);
-        });
-    }
-  }, [selectedSession, user?.email, axiosSecure]);
+//   useEffect(() => {
+//     if (selectedSession) {
+//       axiosSecure
+//         .get(`/materials?sessionId=${selectedSession._id}&tutorEmail=${user.email}`)
+//         .then((res) => {
+//           if (res.data.length > 0) {
+//             console.log(res.data);
+//             setExistingMaterial(res.data[0]); // Set the existing material to state
+//           } else {
+//             setExistingMaterial(null); // No material found, reset state
+//           }
+//         })
+//         .catch((err) => {
+//           console.error("Error fetching existing material:", err);
+//         });
+//     }
+//   }, [selectedSession, user?.email, axiosSecure]);
 
   // Handle file upload to ImgBB
   const uploadImage = async (imageFile) => {
-    console.log(imageFile);
+    // console.log(imageFile);
     const formData = new FormData();
     formData.append("image", imageFile);
 
@@ -92,29 +94,30 @@ const UploadMaterials = () => {
       imageUrls, // Array of image URLs
       driveLinks, // Array of drive links
     };
+    // console.log(newMaterial);
 
  // Check if material already exists for this session
- if (existingMaterial) {
-    // Update existing material (PUT request)
-    axiosSecure
-      .patch(`/materials/${existingMaterial._id}`, newMaterial) // Assume you have the material ID
-      .then((res) => {
-        if (res.data.modifiedCount > 0) {
-          Swal.fire({
-            title: "Success!",
-            text: "Material updated successfully",
-            icon: "success",
-            confirmButtonText: "Ok",
-          });
-          form.reset();
-          setSelectedSession(null);
-          setExistingMaterial(null); // Reset the existing material state
-        }
-      })
-      .catch((err) => {
-        console.error("Error updating material:", err);
-      });
-  } else {
+//  if (existingMaterial) {
+//     // Update existing material (PUT request)
+//     axiosSecure
+//       .patch(`/materials/${existingMaterial._id}`, newMaterial) // Assume you have the material ID
+//       .then((res) => {
+//         if (res.data.modifiedCount > 0) {
+//           Swal.fire({
+//             title: "Success!",
+//             text: "Material updated successfully",
+//             icon: "success",
+//             confirmButtonText: "Ok",
+//           });
+//           form.reset();
+//           setSelectedSession(null);
+//           setExistingMaterial(null); // Reset the existing material state
+//         }
+//       })
+//       .catch((err) => {
+//         console.error("Error updating material:", err);
+//       });
+//   } else {
     // Create new material (POST request)
     axiosSecure
       .post("/materials", newMaterial)
@@ -133,7 +136,7 @@ const UploadMaterials = () => {
       .catch((err) => {
         console.error("Error uploading material:", err);
       });
-  }
+//   }
 };
 
   // Handle adding more Drive Links

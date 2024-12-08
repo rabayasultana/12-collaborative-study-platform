@@ -1,29 +1,26 @@
 import { useEffect, useState } from "react";
-import Swal from "sweetalert2";
-import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
-const ViewMaterials = () => {
-  const { user } = useAuth() || {};
-  const axiosSecure = useAxiosSecure();
-  const [materials, setMaterials] = useState([]);
-  const [updateMaterial, setUpdateMaterial] = useState(null); // For edit mode
+const ViewAllMaterials = () => {
+    const axiosSecure = useAxiosSecure();
+    const [materials, setMaterials] = useState([]);
+    const [updateMaterial, setUpdateMaterial] = useState(null);
 
-  // Fetch materials uploaded by specific tutor
-  useEffect(() => {
-    if (user?.email) {
-      axiosSecure
-        .get(`/tutorMaterials?email=${user.email}`)
-        .then((res) => {
-          setMaterials(res.data); // Update materials state
-        })
-        .catch((err) => {
-          console.error("Failed to fetch materials:", err);
-        });
-    }
-  }, [axiosSecure, user]);
+    // Fetch all materials
+    useEffect(() => {
+          axiosSecure
+            .get(`/materials`)
+            .then((res) => {
+                // console.log(res.data);
+              setMaterials(res.data);
+            })
+            .catch((err) => {
+              console.error("Failed to fetch materials:", err);
+            });
+      }, [axiosSecure]);
 
-//   Delete a material
+      //   Delete a material
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -48,50 +45,50 @@ const ViewMaterials = () => {
     });
   };
 
-  // Handle update submission
-  const handleUpdate = (e) => {
-    e.preventDefault();
-    const form = e.target;
-
-    // Extract and parse the updated values
-    const updatedTitle = form.title.value;
-    const updatedDriveLinks = form.driveLinks.value
-      .split('\n')
-      .map((link) => link.trim())
-      .filter((link) => link); // Filter out empty lines
-    const updatedImageUrls = form.imageUrls.value
-      .split('\n')
-      .map((url) => url.trim())
-      .filter((url) => url); // Filter out empty lines
-
-    axiosSecure
-      .patch(`/materials/${updateMaterial._id}`, {
-        title: updatedTitle,
-        driveLinks: updatedDriveLinks,
-        imageUrls: updatedImageUrls,
-      })
-      .then((res) => {
-        if (res.data.modifiedCount > 0) {
-          Swal.fire(
-            "Updated!",
-            "Material has been updated successfully.",
-            "success"
-          );
-          setMaterials((prev) =>
-            prev.map((material) =>
-              material._id === updateMaterial._id
-                ? { ...material, title: updatedTitle, driveLinks: updatedDriveLinks, imageUrls: updatedImageUrls }
-                : material
-            )
-          );
-          setUpdateMaterial(null); // Exit edit mode
-        }
-      })
-      .catch((err) => {
-        console.error("Failed to update material:", err);
-      });
-  };
-
+    // Handle update submission
+    const handleUpdate = (e) => {
+        e.preventDefault();
+        const form = e.target;
+    
+        // Extract and parse the updated values
+        const updatedTitle = form.title.value;
+        const updatedDriveLinks = form.driveLinks.value
+          .split('\n')
+          .map((link) => link.trim())
+          .filter((link) => link); // Filter out empty lines
+        const updatedImageUrls = form.imageUrls.value
+          .split('\n')
+          .map((url) => url.trim())
+          .filter((url) => url); // Filter out empty lines
+    
+        axiosSecure
+          .patch(`/materials/${updateMaterial._id}`, {
+            title: updatedTitle,
+            driveLinks: updatedDriveLinks,
+            imageUrls: updatedImageUrls,
+          })
+          .then((res) => {
+            if (res.data.modifiedCount > 0) {
+              Swal.fire(
+                "Updated!",
+                "Material has been updated successfully.",
+                "success"
+              );
+              setMaterials((prev) =>
+                prev.map((material) =>
+                  material._id === updateMaterial._id
+                    ? { ...material, title: updatedTitle, driveLinks: updatedDriveLinks, imageUrls: updatedImageUrls }
+                    : material
+                )
+              );
+              setUpdateMaterial(null); // Exit edit mode
+            }
+          })
+          .catch((err) => {
+            console.error("Failed to update material:", err);
+          });
+      };
+    
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
       <h1 className="text-3xl font-bold text-center text-purple mb-8">
@@ -116,7 +113,9 @@ const ViewMaterials = () => {
               {/* Display Multiple Google Drive Links */}
               {material.driveLinks && material.driveLinks.length > 0 && (
                 <div className="mt-4">
-                  <h3 className="font-bold text-gray-700">Google Drive Links:</h3>
+                  <h3 className="font-bold text-gray-700">
+                    Google Drive Links:
+                  </h3>
                   <ul className="list-disc ml-5 space-y-2 mt-2">
                     {material.driveLinks.map((driveLink, index) => (
                       <li key={index}>
@@ -202,7 +201,11 @@ const ViewMaterials = () => {
                 </label>
                 <textarea
                   name="driveLinks"
-                  defaultValue={updateMaterial.driveLinks? updateMaterial.driveLinks.join('\n') : " "}
+                  defaultValue={
+                    updateMaterial.driveLinks
+                      ? updateMaterial.driveLinks.join("\n")
+                      : " "
+                  }
                   className="input input-bordered w-full"
                   placeholder=""
                   rows="4"
@@ -216,7 +219,11 @@ const ViewMaterials = () => {
                 </label>
                 <textarea
                   name="imageUrls"
-                  defaultValue={updateMaterial.imageUrls? updateMaterial.imageUrls.join('\n') : " "}
+                  defaultValue={
+                    updateMaterial.imageUrls
+                      ? updateMaterial.imageUrls.join("\n")
+                      : " "
+                  }
                   className="input input-bordered w-full"
                   placeholder=""
                   rows="4"
@@ -246,4 +253,4 @@ const ViewMaterials = () => {
   );
 };
 
-export default ViewMaterials;
+export default ViewAllMaterials;

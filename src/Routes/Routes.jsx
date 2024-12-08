@@ -17,6 +17,11 @@ import UpdateSession from "../pages/Dashboard/Admin/UpdateSession/UpdateSession"
 import PrivateRoute from "./PrivateRoute";
 import AdminHome from "../pages/Dashboard/Admin/AdminHome/AdminHome";
 import ViewAllUsers from "../pages/Dashboard/Admin/ViewAllUsers/ViewAllUsers";
+import TutorRoute from "./TutorRoute";
+import AdminRoute from "../AdminRoute";
+import ViewAllMaterials from "../pages/Dashboard/Admin/ViewAllMaterials/ViewAllMaterials";
+import StudentRoute from "./StudentRoute";
+import SessionDetails from "../pages/SessionDetails/SessionDetails";
 
   
 export const router = createBrowserRouter([
@@ -37,35 +42,42 @@ export const router = createBrowserRouter([
             element: <Register></Register>
         },
         {
-          path: "/dashboard/student",
-          element: <StudentHome></StudentHome>
-      }
+          path: 'sessionDetails/:id',
+          element: <PrivateRoute><SessionDetails></SessionDetails></PrivateRoute>,
+          loader: ({params}) => fetch(`http://localhost:9000/session/${params.id}`)
+        },
+
+      //   {
+      //     path: "/dashboard/student",
+      //     element: <StudentHome></StudentHome>
+      // }
       ]
     },
     {
       path: "dashboard",
       element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
       children: [
+        // student
         {
           path: 'createNote',
-          element: <CreateNote></CreateNote>
+          element: <StudentRoute><CreateNote></CreateNote></StudentRoute>
         },
         // tutor
         {
           path: 'createSession',
-          element: <CreateStudy></CreateStudy>
+          element: <TutorRoute><CreateStudy></CreateStudy></TutorRoute>
         },
         {
           path: 'viewSession',
-          element: <ViewSession></ViewSession>
+          element: <TutorRoute><ViewSession></ViewSession></TutorRoute>
         },
         {
           path: 'uploadMaterials',
-          element: <UploadMaterials></UploadMaterials>
+          element: <TutorRoute><UploadMaterials></UploadMaterials></TutorRoute>
         },
         {
           path: 'viewMaterials',
-          element: <ViewMaterials></ViewMaterials>
+          element: <TutorRoute><ViewMaterials></ViewMaterials></TutorRoute>
         },
         // admin
         {
@@ -74,15 +86,19 @@ export const router = createBrowserRouter([
         },
         {
           path: 'viewAllUsers',
-          element: <ViewAllUsers></ViewAllUsers>
+          element: <AdminRoute><ViewAllUsers></ViewAllUsers></AdminRoute>
         },
         {
           path: 'viewAllSessions',
-          element: <ViewAllSession></ViewAllSession>
+          element: <AdminRoute><ViewAllSession></ViewAllSession></AdminRoute>
+        },
+        {
+          path: 'viewAllMaterials',
+          element: <AdminRoute><ViewAllMaterials></ViewAllMaterials></AdminRoute>
         },
         {
           path: 'updateSession/:id',
-          element: <UpdateSession></UpdateSession>,
+          element: <AdminRoute><UpdateSession></UpdateSession></AdminRoute>,
           loader: ({params}) => fetch(`http://localhost:9000/session/${params.id}`)
         },
       ]
