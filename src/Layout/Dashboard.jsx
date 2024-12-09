@@ -1,11 +1,11 @@
 import {  NavLink, Outlet, } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
+// import useAuth from "../hooks/useAuth";
 import useAdmin from "../hooks/useAdmin";
 import useTutor from "../hooks/useTutor";
 import useStudent from "../hooks/useStudent";
 
 const Dashboard = () => {
-    const {logOut} = useAuth();
+    // const {logOut} = useAuth();
     const [isAdmin] = useAdmin();
     const [isTutor] = useTutor();
     const [isStudent] = useStudent();
