@@ -5,7 +5,7 @@ import Main from "../Layout/Main";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
-import StudentHome from "../pages/Dashboard/StudentHome/StudentHome";
+// import StudentHome from "../pages/Dashboard/StudentHome/StudentHome";
 import Dashboard from "../Layout/Dashboard";
 import CreateNote from "../pages/Dashboard/Student/CreateNote/CreateNote";
 import CreateStudy from "../pages/Dashboard/Tutor/CreateStudy/CreateStudy";
@@ -22,6 +22,7 @@ import AdminRoute from "../AdminRoute";
 import ViewAllMaterials from "../pages/Dashboard/Admin/ViewAllMaterials/ViewAllMaterials";
 import StudentRoute from "./StudentRoute";
 import SessionDetails from "../pages/SessionDetails/SessionDetails";
+import ViewNotes from "../pages/Dashboard/Student/ViewNotes/ViewNotes";
 
   
 export const router = createBrowserRouter([
@@ -61,6 +62,10 @@ export const router = createBrowserRouter([
         {
           path: 'createNote',
           element: <StudentRoute><CreateNote></CreateNote></StudentRoute>
+        },
+        {
+          path: 'viewNotes',
+          element: <StudentRoute><ViewNotes></ViewNotes></StudentRoute>
         },
         // tutor
         {

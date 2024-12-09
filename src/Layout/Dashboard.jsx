@@ -74,7 +74,7 @@ const Dashboard = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="manageNotes" className="hover:underline">
+              <NavLink to="/dashboard/viewNotes" className="hover:underline">
               Manage Personal Notes
               </NavLink>
             </li>

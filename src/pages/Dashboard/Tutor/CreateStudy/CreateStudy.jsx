@@ -45,8 +45,8 @@ const CreateStudy = () => {
             Create Study Session
           </h2>
     
-          <form
-            onSubmit={handleCreateSession}
+          <form ref={formRef} 
+            onSubmit= {handleCreateSession}
             className="card-body md:w-3/4 lg:w-1/2 mx-auto"
           >
             {/* Session Title */}
