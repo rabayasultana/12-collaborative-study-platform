@@ -64,7 +64,7 @@ const Dashboard = () => {
             </> : isStudent?
             <>
             <li>
-              <NavLink to="view-sessions" className="hover:underline">
+              <NavLink to="/dashboard/viewBookedSession" className="hover:underline">
                 View Booked Sessions
               </NavLink>
             </li>
