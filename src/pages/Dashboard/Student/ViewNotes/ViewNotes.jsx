@@ -13,7 +13,7 @@ const ViewNotes = () => {
   useEffect(() => {
     if (user?.email) {
       axiosSecure
-        .get(`/notes?studentEmail=${user.email}`)
+        .get(`/studentNotes?studentEmail=${user.email}`)
         .then((res) => {
           setNotes(res.data);
         })

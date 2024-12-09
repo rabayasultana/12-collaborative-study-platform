@@ -26,6 +26,7 @@ import ViewNotes from "../pages/Dashboard/Student/ViewNotes/ViewNotes";
 import ViewBookedSession from "../pages/Dashboard/Student/ViewBookedSession/ViewBookedSession";
 import ViewBookedMaterials from "../pages/Dashboard/Student/ViewBookedMaterials/ViewBookedMaterials";
 import MaterialDetails from "../pages/Dashboard/Student/ViewBookedMaterials/MaterialDetails";
+import ViewAllNotes from "../pages/Dashboard/Tutor/ViewAllNotes/ViewAllNotes";
 
   
 export const router = createBrowserRouter([
@@ -99,6 +100,10 @@ export const router = createBrowserRouter([
         {
           path: 'viewMaterials',
           element: <TutorRoute><ViewMaterials></ViewMaterials></TutorRoute>
+        },
+        {
+          path: 'viewAllNotes',
+          element: <TutorRoute><ViewAllNotes></ViewAllNotes></TutorRoute>
         },
         // admin
         {

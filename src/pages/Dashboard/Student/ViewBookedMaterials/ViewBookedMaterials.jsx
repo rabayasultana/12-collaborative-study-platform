@@ -7,7 +7,6 @@ const ViewBookedMaterials = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     const [bookedSessions, setBookedSessions] = useState([]);
-    // const [selectedSession, setSelectedSession] = useState(null);
 
     useEffect(() => {
         if (user?.email) {

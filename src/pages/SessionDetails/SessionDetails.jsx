@@ -1,46 +1,35 @@
 import  { useState, useEffect } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
 import useAdmin from '../../hooks/useAdmin';
 import useTutor from '../../hooks/useTutor';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 
-// Fetch session details based on the session ID
-// const fetchSessionDetails = async (sessionId) => {
-//   const response = await fetch(`/sessions/${sessionId}`);
-//   if (!response.ok) {
-//     throw new Error('Session details not found');
-//   }
-//   return response.json();
-// };
-
-// // Mutation to handle booking session
-// const bookSession = async (bookingData) => {
-//   const response = await fetch('/bookedSessions', {
-//     method: 'POST',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify(bookingData),
-//   });
-
-//   if (!response.ok) {
-//     throw new Error('Booking failed');
-//   }
-//   return response.json();
-// };
-
 const SessionDetails = () => {
   const session = useLoaderData();
   const { user} = useAuth();
-//   const { user, isAdmin, isTutor } = useAuth();
   const [isAdmin] = useAdmin();
     const [isTutor] = useTutor();
   const navigate = useNavigate();
   const [isBooked, setIsBooked] = useState(false);
+  const [reviews, setReviews] = useState([]);
   const axiosSecure = useAxiosSecure();
 
-  
+  useEffect(() => {
+    if (session._id) {
+      axiosSecure
+        .get(`/reviews/${session._id}`)
+        .then((res) => {
+          // console.log("Fetched materials:", res.data);
+          setReviews(res.data); // Update materials
+        })
+        .catch((err) => {
+          console.error("Error fetching materials:", err);
+        });
+    }
+  }, [session._id, axiosSecure]);
+
 
   // Check if the session has already been booked
 useEffect(() => {
@@ -59,34 +48,9 @@ useEffect(() => {
     }
   }, [axiosSecure, user?.email, session._id]);
 
-//   // Use Tanstack Query for booking the session
-//   const { mutate: bookNow } = useMutation(bookSession, {
-//     onSuccess: (data) => {
-//       Swal.fire('Success', 'Session booked successfully!', 'success');
-//       setIsBooked(true);
-//     },
-//     onError: (error) => {
-//       Swal.fire('Error', error.message, 'error');
-//     },
-//   });
 
   // Handle booking action
   const handleBookNow = () => {
-    // if (!user) {
-    //   // Redirect to login if not logged in
-    //   navigate('/login');
-    // } else if (session.registrationFee === 0 || isBooked) {
-    //   // Book session directly if free or already booked
-    //   const bookingData = {
-    //     sessionId: session._id,
-    //     studentEmail: user.email,
-    //     tutorEmail: session.tutorEmail,
-    //   };
-    //   bookNow(bookingData);
-    // } else {
-    //   // Redirect to payment page if session is paid
-    //   navigate('/payment', { state: { sessionId: session._id, studentEmail: user.email } });
-    // }
 
     const newBookedSession = {
         ...session,
@@ -135,7 +99,20 @@ useEffect(() => {
     {/* Session Info */}
     <div className="session-info space-y-4 text-gray-700">
       <p><strong className="font-semibold">Tutor Name:</strong> {session.tutorName}</p>
-      <p><strong className="font-semibold">Average Rating:</strong> {session.averageRating}</p>
+      <p>
+  <strong className="font-semibold">Average Rating: </strong>
+  {reviews && reviews.length > 0 ? (
+    <>
+      {/* Calculate and display the average rating */}
+        {(
+          reviews.reduce((sum, review) => sum + Number(review.rating), 0) / reviews.length
+        ).toFixed(1)}{" "}
+    </>
+  ) : (
+    <strong className="text-gray-500">No ratings</strong>
+  )}
+</p>
+
       <p><strong className="font-semibold">Description:</strong> {session.description}</p>
       <p><strong className="font-semibold">Registration Start:</strong> {new Date(session.registrationStart).toLocaleDateString()}</p>
       <p><strong className="font-semibold">Registration End:</strong> {new Date(session.registrationEnd).toLocaleDateString()}</p>
@@ -148,11 +125,10 @@ useEffect(() => {
     {/* Reviews */}
     <div className="reviews mt-6 border-t pt-4">
       <h4 className="text-lg font-semibold text-gray-800 mb-4">Reviews:</h4>
-      {session.reviews && session.reviews.length > 0 ? (
-        session.reviews.map((review, index) => (
-          <div key={index} className="review border-b py-4">
-            <p><strong>{review.studentName}:</strong> {review.comment}</p>
-            <p><strong>Rating:</strong> {review.rating}</p>
+      {reviews && reviews.length > 0 ? (
+        reviews.map((review) => (
+          <div key={review._id} className="review border-b py-4">
+            <p>{review.review}</p>
           </div>
         ))
       ) : (

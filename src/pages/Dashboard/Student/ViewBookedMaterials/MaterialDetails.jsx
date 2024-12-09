@@ -68,7 +68,7 @@ const MaterialDetails = () => {
           <h4 className="text-lg font-semibold text-gray-700">Images</h4>
           {material.imageUrls.length > 0 ? (
             material.imageUrls.map((url, index) => (
-              <div key={index} className="flex justify-between items-center mb-2">
+                <div key={index} className="flex justify-between items-center mb-2">
                 <img
                   src={url}
                   alt={`Material Image ${index + 1}`}
@@ -76,16 +76,32 @@ const MaterialDetails = () => {
                 />
                 <button
                   onClick={() => {
-                    const link = document.createElement("a");
-                    link.href = url;
-                    link.download = `material-image-${index + 1}.jpg`;
-                    link.click();
+                    fetch(url)
+                      .then((response) => {
+                        if (!response.ok) {
+                          throw new Error("Network response was not ok");
+                        }
+                        return response.blob();
+                      })
+                      .then((blob) => {
+                        const link = document.createElement("a");
+                        link.href = URL.createObjectURL(blob);
+                        link.download = `material-image-${index + 1}.jpg`; // Set the file name
+                        document.body.appendChild(link); // Append the link to the body
+                        link.click(); // Trigger the download
+                        document.body.removeChild(link); // Remove the link from the document
+                        URL.revokeObjectURL(link.href); // Free up memory
+                      })
+                      .catch((error) => {
+                        console.error("Error downloading the image:", error);
+                      });
                   }}
                   className="px-4 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition"
                 >
                   Download
                 </button>
               </div>
+              
             ))
           ) : (
             <p className="text-gray-500">No images available.</p>

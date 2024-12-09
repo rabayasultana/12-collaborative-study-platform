@@ -22,7 +22,7 @@ const ViewSession = () => {
       // If new session created successfully
       if (response.data.insertedId) {
         // Delete the old rejected session
-        // await axiosSecure.delete(`/session/${session._id}`);
+        await axiosSecure.delete(`/session/${session._id}`);
 
         // Show success alert
         Swal.fire({

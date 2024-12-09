@@ -61,6 +61,11 @@ const Dashboard = () => {
               View Materials
               </NavLink>
             </li>
+            <li>
+              <NavLink to="/dashboard/viewAllNotes" className="hover:underline">
+              View All Notes
+              </NavLink>
+            </li>
             </> : isStudent?
             <>
             <li>
