@@ -27,6 +27,7 @@ import ViewBookedSession from "../pages/Dashboard/Student/ViewBookedSession/View
 import ViewBookedMaterials from "../pages/Dashboard/Student/ViewBookedMaterials/ViewBookedMaterials";
 import MaterialDetails from "../pages/Dashboard/Student/ViewBookedMaterials/MaterialDetails";
 import ViewAllNotes from "../pages/Dashboard/Tutor/ViewAllNotes/ViewAllNotes";
+import Payment from "../pages/Payment/Payment";
 
   
 export const router = createBrowserRouter([
@@ -78,6 +79,10 @@ export const router = createBrowserRouter([
         {
           path: 'viewBookedMaterials',
           element: <StudentRoute><ViewBookedMaterials></ViewBookedMaterials></StudentRoute>
+        },
+        {
+          path: 'payment',
+          element: <StudentRoute><Payment></Payment></StudentRoute>
         },
         {
           path: 'showMaterials/:id',

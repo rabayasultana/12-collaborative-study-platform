@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../providers/Authprovider";
-import SocialLogin from "./SocialLogin"; 
+import SocialLogin from "./SocialLogin";
 
 const Login = () => {
   const [loginError, setLoginError] = useState("");
@@ -28,26 +28,12 @@ const Login = () => {
     signIn(email, password)
       .then((result) => {
         const user = result.user;
+        console.log(user);
+        setSuccess("User Logged in Successfully");
+        toast("User Logged in Successfully");
 
-        // Generate JWT token
-        fetch("https://your-server-url.com/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email: user.email }),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.token) {
-              localStorage.setItem("authToken", data.token); // Store JWT token securely
-              setSuccess("User Logged in Successfully");
-              toast("User Logged in Successfully");
-
-              // Navigate after login
-              setTimeout(() => navigate(from), 1000);
-            }
-          });
+        // Navigate after login
+        setTimeout(() => navigate(from), 1000);
       })
       .catch((error) => {
         console.error(error);

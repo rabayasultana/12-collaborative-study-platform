@@ -25,7 +25,8 @@ const SessionDetails = () => {
           setReviews(res.data); // Update materials
         })
         .catch((err) => {
-          console.error("Error fetching materials:", err);
+          // console.error("Error fetching reviews:", err);
+          setReviews([]); 
         });
     }
   }, [session._id, axiosSecure]);
@@ -80,10 +81,10 @@ useEffect(() => {
             });
         }
         else {
-              // Redirect to payment page if session is paid
-              navigate('/payment', { state: { sessionId: session._id, studentEmail: user.email } });
-            }
-      };
+          // Redirect to payment page if session is paid
+          navigate('/dashboard/payment', { state: { session } });
+        }
+      }
 
 
   const startDate = new Date(session.registrationStart);
