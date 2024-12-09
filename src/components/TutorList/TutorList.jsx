@@ -17,8 +17,8 @@ const TutorList = () => {
 
 
   // Debugging: Log sessions and unique tutors
-  console.log("Sessions:", sessions);
-  console.log("Unique Tutors:", uniqueTutors);
+  // console.log("Sessions:", sessions);
+  // console.log("Unique Tutors:", uniqueTutors);
 
   return (
     <div className="py-8 bg-gray-50">

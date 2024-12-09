@@ -24,6 +24,8 @@ import StudentRoute from "./StudentRoute";
 import SessionDetails from "../pages/SessionDetails/SessionDetails";
 import ViewNotes from "../pages/Dashboard/Student/ViewNotes/ViewNotes";
 import ViewBookedSession from "../pages/Dashboard/Student/ViewBookedSession/ViewBookedSession";
+import ViewBookedMaterials from "../pages/Dashboard/Student/ViewBookedMaterials/ViewBookedMaterials";
+import MaterialDetails from "../pages/Dashboard/Student/ViewBookedMaterials/MaterialDetails";
 
   
 export const router = createBrowserRouter([
@@ -71,6 +73,15 @@ export const router = createBrowserRouter([
         {
           path: 'viewBookedSession',
           element: <StudentRoute><ViewBookedSession></ViewBookedSession></StudentRoute>
+        },
+        {
+          path: 'viewBookedMaterials',
+          element: <StudentRoute><ViewBookedMaterials></ViewBookedMaterials></StudentRoute>
+        },
+        {
+          path: 'showMaterials/:id',
+          element: <StudentRoute><MaterialDetails></MaterialDetails></StudentRoute>,
+          loader: ({params}) => fetch(`http://localhost:9000/session/${params.id}`)
         },
         // tutor
         {

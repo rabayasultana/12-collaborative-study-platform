@@ -79,7 +79,7 @@ const Dashboard = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="materials" className="hover:underline">
+              <NavLink to="viewBookedMaterials" className="hover:underline">
               View Study Materials
               </NavLink>
             </li>
