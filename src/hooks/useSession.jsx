@@ -4,10 +4,11 @@ const useSession = () => {
     const [studySessions, setStudySessions] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect( () => {
-        fetch('http://localhost:9000/session')
+        fetch('https://12-study-platform-server.vercel.app/session')
         .then(res => res.json())
         .then(data => {
             setStudySessions(data)
+            // console.log(data);
             setLoading(false);
     });
     }, [])

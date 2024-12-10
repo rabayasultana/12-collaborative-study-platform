@@ -18,11 +18,11 @@ const StudySession = () => {
     : approvedSessions.slice(0, MAX_SESSIONS_DISPLAY);
 
   return (
-    <div>
+    <div className="my-20 bg-gray-100 rounded-2xl py-8">
       {/* Section Header */}
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-blue-600">Study Sessions</h2>
-        <p className="text-gray-600 mt-2">
+        <h2 className="text-4xl font-extrabold text-purple">Study Sessions</h2>
+        <p className=" mt-2">
           Explore ongoing and upcoming sessions
         </p>
       </div>

@@ -79,7 +79,7 @@ const handleUpdate = (e) => {
       </div>
             {/* Duration */}
             <div>
-        <label htmlFor="duration" className="block text-sm font-medium text-gray-700">Duration (Days)</label>
+        <label htmlFor="duration" className="block text-sm font-medium text-gray-700">Duration (hours)</label>
         <input
           type="number"
           id="duration"

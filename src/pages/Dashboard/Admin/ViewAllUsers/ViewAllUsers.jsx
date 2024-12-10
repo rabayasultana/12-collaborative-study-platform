@@ -69,7 +69,7 @@ const ViewAllUsers = () => {
     });
   };
   return (
-    <div>
+    <div >
       <div className="flex justify-center my-4">
         <h2 className="text-3xl text-purple">All Users</h2>
       </div>
@@ -82,48 +82,50 @@ const ViewAllUsers = () => {
           className="input input-bordered w-1/3"
         />
       </div>
-      <div className="overflow-x-auto">
-        <table className="table table-zebra w-full">
-          {/* head */}
-          <thead>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user, index) => (
-              <tr key={user._id}>
-                <th>{index + 1}</th>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>
-                  <div className="flex items-center gap-2">
-                    <p>{user.role}</p>
-                    <button
-                      onClick={() => setSelectedUser(user)} // Open modal with user info
-                      className="btn btn-xs bg-purple text-white"
-                    >
-                      <FaUserEdit className="text-lg" />
-                    </button>
-                  </div>
-                </td>
-                <td>
-                  <button
-                    onClick={() => handleDeleteUser(user)}
-                    className="btn btn-ghost btn-lg"
-                  >
-                    <FaTrashAlt className="text-red-600"></FaTrashAlt>
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+     <div className="overflow-x-auto">
+  <table className="table table-zebra w-full">
+    {/* Table Header */}
+    <thead className="bg-gray-100">
+      <tr>
+        <th className="px-4 py-2">#</th>
+        <th className="px-4 py-2">Name</th>
+        <th className="px-4 py-2">Email</th>
+        <th className="px-4 py-2">Role</th>
+        <th className="px-4 py-2">Action</th>
+      </tr>
+    </thead>
+    {/* Table Body */}
+    <tbody>
+      {users.map((user, index) => (
+        <tr key={user._id} className="hover:bg-gray-100">
+          <td className="px-4 py-2">{index + 1}</td>
+          <td className="px-4 py-2">{user.name}</td>
+          <td className="px-4 py-2 truncate max-w-xs">{user.email}</td>
+          <td className="px-4 py-2">
+            <div className="flex items-center gap-2">
+              <p>{user.role}</p>
+              <button
+                onClick={() => setSelectedUser(user)} // Open modal with user info
+                className="btn btn-xs bg-purple text-white"
+              >
+                <FaUserEdit className="text-lg" />
+              </button>
+            </div>
+          </td>
+          <td className="px-4 py-2">
+            <button
+              onClick={() => handleDeleteUser(user)}
+              className="btn btn-ghost btn-lg"
+            >
+              <FaTrashAlt className="text-red-600"></FaTrashAlt>
+            </button>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
 
       {/* Role Update Modal */}
       {selectedUser && (

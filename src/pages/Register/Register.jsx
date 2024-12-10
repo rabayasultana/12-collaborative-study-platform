@@ -75,9 +75,8 @@ const Register = () => {
               .then(res => {
                 if (res.data.insertedId){
                   setSuccess("User Created Successfully");
-                  toast("User Created Successfully");
-                  navigate(from)
-                  // navigate('/')
+                  toast("Registration Successful");
+                  setTimeout(() => navigate(from), 1000);
                   
                 }
               })

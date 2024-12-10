@@ -14,49 +14,47 @@ import slide4 from "../../assets/images/1.study.jpg";
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import Slide from "./Slide";
-import { Link } from "react-router-dom";
 
 export default function Banner() {
   return (
-    <div className="flex gap-8 items-center">
-    <div className="w-1/3 ">
-
-        <h2 className="text-2xl text-purple font-bold pb-4">Upload and share study materials, create a collective knowledge base, and learn from each others perspectives.</h2>
+    <div className="md:flex gap-8 items-center">
+      <div className="md:w-1/3 ">
+        <h2 className="text-2xl text-purple font-bold pb-4">
+          Upload and share study materials, create a collective knowledge base,
+          and learn from each others perspectives.
+        </h2>
         <br />
-          <Link to='/addBook' className='w-full px-5 py-4 mt-4 text-xl font-medium text-neutral-100  capitalize transition-colors duration-300 transform bg-purple rounded-md lg:w-auto hover:bg-pink-200 focus:outline-none focus:bg-gray-500'>
-            Add your favorite books
-          </Link>
-        </div>
-        <div className="w-2/3 mx-auto p-2 border border-4 border-blue-200">
-      <Swiper
-        spaceBetween={30}
-        centeredSlides={true}
-        loop={true}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-        }}
-        pagination={{
-          clickable: true,
-        }}
-        navigation={true}
-        modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper"
-      >
-        <SwiperSlide>
-          <Slide image={slide1}></Slide>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Slide image={slide2}></Slide>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Slide image={slide3}></Slide>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Slide image={slide4}></Slide>
-        </SwiperSlide>
-      </Swiper>
-    </div>
+      </div>
+      <div className="md:w-2/3 mx-auto p-2 border-4 border-blue-200">
+        <Swiper
+          spaceBetween={30}
+          centeredSlides={true}
+          loop={true}
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+          modules={[Autoplay, Pagination, Navigation]}
+          className="mySwiper"
+        >
+          <SwiperSlide>
+            <Slide image={slide1}></Slide>
+          </SwiperSlide>
+          <SwiperSlide>
+            <Slide image={slide2}></Slide>
+          </SwiperSlide>
+          <SwiperSlide>
+            <Slide image={slide3}></Slide>
+          </SwiperSlide>
+          <SwiperSlide>
+            <Slide image={slide4}></Slide>
+          </SwiperSlide>
+        </Swiper>
+      </div>
     </div>
   );
 }

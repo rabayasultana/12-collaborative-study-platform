@@ -90,13 +90,13 @@ const ViewAllMaterials = () => {
       };
     
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div className="p-6 bg-gray-50 min-h-screen ">
       <h1 className="text-3xl font-bold text-center text-purple mb-8">
         View Materials
       </h1>
 
       {/* List of materials */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2">
         {materials.map((material) => (
           <div
             key={material._id}
@@ -116,7 +116,7 @@ const ViewAllMaterials = () => {
                   <h3 className="font-bold text-gray-700">
                     Google Drive Links:
                   </h3>
-                  <ul className="list-disc ml-5 space-y-2 mt-2">
+                  <ul className="list-disc ml-5 space-y-2 mt-2 overflow-auto max-h-48">
                     {material.driveLinks.map((driveLink, index) => (
                       <li key={index}>
                         <a
@@ -137,7 +137,7 @@ const ViewAllMaterials = () => {
               {material.imageUrls && material.imageUrls.length > 0 && (
                 <div className="mt-4">
                   <h3 className="font-bold text-gray-700">Image Links:</h3>
-                  <ul className="list-disc ml-5 space-y-2 mt-2">
+                  <ul className="list-disc ml-5 space-y-2 mt-2 overflow-auto max-h-48">
                     {material.imageUrls.map((imageUrl, index) => (
                       <li key={index}>
                         <a

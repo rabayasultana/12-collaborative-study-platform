@@ -24,7 +24,7 @@ const ViewBookedSession = () => {
 
     return (
         <div className="py-8 bg-gray-50">
-        <h2 className="text-4xl font-bold text-center text-blue-600 mb-6">
+        <h2 className="text-4xl font-bold text-center text-purple mb-6">
           Your Booked Sessions
         </h2>
         <p className="text-center text-gray-600 mb-10">
@@ -38,13 +38,13 @@ const ViewBookedSession = () => {
               className="bg-white shadow-lg rounded-lg overflow-hidden transition transform hover:scale-105 duration-300"
             >
               <div className="p-6">
-                <h3 className="text-2xl font-bold text-gray-800">{session.title}</h3>
+                <h3 className="text-2xl font-bold text-purple">{session.title}</h3>
                 <p className="text-gray-600 mt-2">Tutor: {session.tutorName}</p>
                 <p className="text-gray-600 mt-1">Date: {new Date(session.classStart).toLocaleDateString()}</p>
                 <div className="mt-4">
                   <button
                     onClick={() => setSelectedSession(session)}
-                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                    className="px-4 py-2 bg-purple text-white rounded hover:bg-opacity-40"
                   >
                     View Details
                   </button>

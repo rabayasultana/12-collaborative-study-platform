@@ -22,7 +22,7 @@ const ViewBookedMaterials = () => {
       }, [axiosSecure, user?.email]);
     return (
         <div className="py-8 bg-gray-50">
-        <h2 className="text-4xl font-bold text-center text-blue-600 mb-6">
+        <h2 className="text-4xl font-bold text-center text-purple mb-6">
           Your Booked Sessions
         </h2>
         <p className="text-center text-gray-600 mb-10">
@@ -31,7 +31,7 @@ const ViewBookedMaterials = () => {
   
         <div className="overflow-x-auto mx-auto max-w-6xl px-4">
           <table className="min-w-full bg-white rounded-lg shadow-md">
-            <thead className="bg-blue-600 text-white text-left">
+            <thead className="bg-purple text-white text-left">
               <tr>
                 <th className="py-3 px-6">Session Title</th>
                 <th className="py-3 px-6">Tutor Name</th>
@@ -49,7 +49,7 @@ const ViewBookedMaterials = () => {
                   <td className="py-3 px-6 text-center">
                     <Link
                       to={`/dashboard/showMaterials/${session._id}`}
-                      className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+                      className="inline-block px-4 py-2 bg-purple text-white rounded hover:bg-opacity-40 transition"
                     >
                       Show Materials
                     </Link>

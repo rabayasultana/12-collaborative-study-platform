@@ -38,27 +38,10 @@ const StudySessionCard = ({ session }) => {
           </p>
 
           <div className="mt-4 flex justify-between items-center">
-            {/* <button
-              className={`px-4 py-2 rounded text-white font-semibold ${
-                status === "ongoing"
-                  ? "bg-blue-500 hover:bg-blue-600"
-                  : "bg-gray-400 cursor-not-allowed"
-              }`}
-              disabled={status !== "ongoing"}
-            >
-              Read More
-            </button> */}
-            {/* <button
-              className="text-blue-500 hover:underline"
-              onClick={() => alert(`Details of ${title}`)}
-            >
-              View Details
-            </button> */}
             <Link to={`/sessionDetails/${session._id}`}>
 
 <button
       className={`px-4 py-2 rounded=lg text-white font-semibold bg-purple  hover:bg-opacity-50`}
-    //   disabled={status !== "ongoing"}
     >
       Read More
     </button>

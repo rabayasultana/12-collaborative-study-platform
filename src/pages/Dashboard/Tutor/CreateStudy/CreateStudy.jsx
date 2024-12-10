@@ -41,7 +41,7 @@ const CreateStudy = () => {
     
       return (
         <div className="animate__animated animate__fadeInUp">
-          <h2 className="text-3xl mt-10 text-center text-purple-700 font-bold">
+          <h2 className="text-4xl mt-10 text-center text-purple font-bold">
             Create Study Session
           </h2>
     

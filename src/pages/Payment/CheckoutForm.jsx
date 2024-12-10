@@ -2,7 +2,6 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const CheckoutForm = ({session}) => {
@@ -22,7 +21,7 @@ const CheckoutForm = ({session}) => {
         if (session?.fee) {
             axiosSecure.post('/create-payment-intent', { fee: session.fee })
                 .then(res => {
-                    console.log(res.data.clientSecret);
+                    // console.log(res.data.clientSecret);
                     setClientSecret(res.data.clientSecret);
                 })
         }
@@ -96,10 +95,20 @@ const handleSubmit = async(event) => {
 
             // save session to booked session
             const newBookedSession = {
-                ...session,
+                title: session.title,
+                tutorName: session.tutorName,
+                description: session.description,
+                registrationStart: session.registrationStart,
+                registrationEnd: session.registrationEnd,
+                classStart: session.classStart,
+                classEnd: session.classEnd,
+                duration: session.duration,
+                fee: session.fee,
+                status: session.status,
                 sessionId: session._id,
-                    studentEmail: user.email,
-              }
+                studentEmail: user.email,
+                tutorEmail: session.tutorEmail,
+              };
 
               axiosSecure
             .post('/bookedSession', newBookedSession)

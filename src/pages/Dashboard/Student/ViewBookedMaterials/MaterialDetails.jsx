@@ -29,7 +29,7 @@ const MaterialDetails = () => {
     return (
       <div className="flex justify-center items-center h-screen">
         <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"></div>
-        <span className="ml-2 text-blue-600">Loading materials...</span>
+        <span className="ml-2 text-purple">Loading materials...</span>
       </div>
     );
   }
@@ -37,8 +37,8 @@ const MaterialDetails = () => {
   if (materials.length === 0) {
     return (
       <div className="text-center mt-10">
-        <h2 className="text-2xl font-bold text-gray-600">No Materials Found</h2>
-        <p className="text-gray-500">
+        <h2 className="text-2xl font-bold">No Materials Found</h2>
+        <p className="">
           This session have no materials yet.
         </p>
       </div>
@@ -47,7 +47,7 @@ const MaterialDetails = () => {
 
   return (
     <div className="py-8 bg-gray-50">
-      <h2 className="text-4xl font-bold text-center text-blue-600 mb-6">
+      <h2 className="text-4xl font-bold text-center text-purple mb-6">
         Study Materials
       </h2>
       <p className="text-center text-gray-600 mb-10">
@@ -61,7 +61,7 @@ const MaterialDetails = () => {
       className="bg-white shadow-lg rounded-lg overflow-hidden"
     >
       <div className="p-4">
-        <h3 className="text-xl font-bold text-gray-800">{material.title}</h3>
+        <h3 className="text-2xl font-bold text-purple mb-2">{material.title}</h3>
         <p className="text-gray-600 mb-2">Tutor: {material.tutorEmail}</p>
 
         <div className="mt-4">
@@ -96,7 +96,7 @@ const MaterialDetails = () => {
                         console.error("Error downloading the image:", error);
                       });
                   }}
-                  className="px-4 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition"
+                  className="px-4 py-1 bg-purple text-white text-sm rounded hover:bg-opacity-40 transition"
                 >
                   Download
                 </button>

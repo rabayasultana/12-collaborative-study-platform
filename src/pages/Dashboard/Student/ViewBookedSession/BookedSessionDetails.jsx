@@ -42,7 +42,7 @@ const BookedSessionDetails = ({ session, onClose }) => {
           >
             ×
           </button>
-          <h2 className="text-3xl font-bold text-blue-600">{session.title}</h2>
+          <h2 className="text-3xl font-bold text-purple">{session.title}</h2>
           <p className="text-gray-600 mt-2">Tutor: {session.tutorName}</p>
           <p className="text-gray-600 mt-1">Date: {new Date(session.classStart).toLocaleString()}</p>
           <p className="text-gray-600 mt-1">Duration: {session.duration} hours</p>
@@ -73,7 +73,7 @@ const BookedSessionDetails = ({ session, onClose }) => {
             </div>
             <button
               type="submit"
-              className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+              className="px-4 py-2 bg-purple text-white rounded hover:bg-opacity-50"
             >
               Submit Review
             </button>

@@ -4,7 +4,7 @@ const Slide = ({image}) => {
   return (
     
         <div
-      className='w-full bg-cover h-[38rem]'
+      className=' bg-cover w-full h-[200px] md:h-[38rem]'
       style={{
         backgroundImage: `url(${image})`,
       }}

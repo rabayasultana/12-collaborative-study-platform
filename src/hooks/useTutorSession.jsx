@@ -12,7 +12,7 @@ const useTutorSession = () => {
       setLoading(false);
       return;
     }
-    fetch("http://localhost:9000/session")
+    fetch("https://12-study-platform-server.vercel.app/session")
       .then((res) => res.json())
       .then((data) => {
         const filteredSessions = data.filter(

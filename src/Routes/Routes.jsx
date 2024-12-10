@@ -5,7 +5,6 @@ import Main from "../Layout/Main";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
-// import StudentHome from "../pages/Dashboard/StudentHome/StudentHome";
 import Dashboard from "../Layout/Dashboard";
 import CreateNote from "../pages/Dashboard/Student/CreateNote/CreateNote";
 import CreateStudy from "../pages/Dashboard/Tutor/CreateStudy/CreateStudy";
@@ -50,7 +49,7 @@ export const router = createBrowserRouter([
         {
           path: 'sessionDetails/:id',
           element: <PrivateRoute><SessionDetails></SessionDetails></PrivateRoute>,
-          loader: ({params}) => fetch(`http://localhost:9000/session/${params.id}`)
+          loader: ({params}) => fetch(`https://12-study-platform-server.vercel.app/session/${params.id}`)
         },
 
       //   {
@@ -87,7 +86,7 @@ export const router = createBrowserRouter([
         {
           path: 'showMaterials/:id',
           element: <StudentRoute><MaterialDetails></MaterialDetails></StudentRoute>,
-          loader: ({params}) => fetch(`http://localhost:9000/session/${params.id}`)
+          loader: ({params}) => fetch(`https://12-study-platform-server.vercel.app/session/${params.id}`)
         },
         // tutor
         {
@@ -130,7 +129,7 @@ export const router = createBrowserRouter([
         {
           path: 'updateSession/:id',
           element: <AdminRoute><UpdateSession></UpdateSession></AdminRoute>,
-          loader: ({params}) => fetch(`http://localhost:9000/session/${params.id}`)
+          loader: ({params}) => fetch(`https://12-study-platform-server.vercel.app/session/${params.id}`)
         },
       ]
     }
